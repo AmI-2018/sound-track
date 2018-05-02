@@ -1,5 +1,5 @@
 img {
-	max-width: 100%;
+  max-width: 100%;
 }
 
 html { font-size: 100%; }
@@ -10,7 +10,7 @@ body {
 	font-size: 100%;
 	line-height: 1.5;
 	color: #000;
-	width: 700px;
+	width: 80%;
 	margin: auto;
 	background: #fff;
 	position: relative;
@@ -18,27 +18,34 @@ body {
 }
 
 h1,h2,h3,h4,h5,h6 { 
-    line-height: 1; 
-    font-family: Helvetica, Arial, sans-serif;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+h1 {
+  font-size: 420%;
+	margin: 0 0 0.1em;
+	font-family: Helvetica, Arial, sans-serif;
 }
 
 h2 { font-size: 22pt; }
 h3 { font-size: 20pt; }
 h4 { font-size: 18pt; }
-h5 { font-size: 16pt; }
-h6 { font-size: 14pt; }
+
+h5 { 
+  font-size: 16pt;
+  line-height: 0.01;
+  }
+  
+h6 {
+  font-size: 12pt;
+  line-height: 0.1;
+  }
 
 ::selection { background: #745626; }
 ::-moz-selection { background: #745626; }
 
-h1 {
-	font-size: 420%;
-	margin: 0 0 0.1em;
-	font-family: Helvetica, Arial, sans-serif;
-}
-
-h1 a,
-h1 a:hover {
+p a,
+p a:hover {
 	color: #d51722;
 	font-weight: normal;
 	text-decoration: none;
@@ -67,7 +74,7 @@ h1 a:hover {
   width: 33%;
 }
 
-#vision-statement {
+#ami-main-steps {
   clear: both;
 }
 
