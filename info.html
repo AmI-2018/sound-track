@@ -20,8 +20,8 @@
 <div id = "purpose-and-scope">
 <hr>
   <h3 id="purpose-and-scope">Purpose and Scope</h3>
-  <p>The goal of the system is to improve the user experience of listening to audio content while moving through various areas of their living space. Sound Track accomplishes this by routing the output(s) of existing audio sources to existing audio outputs such that the user is able to move freely around their living space while enjoying a seamless listening experience.</p>
-  <p>Sound Track is meant to stream existing audio output from other applications and devices and route to other existing speakers and devices. It is not the media player software nor the speaker.</p>
+  <p> The goal of the system is to improve the user experience of listening to audio content while moving through various areas of their living space. Sound Track accomplishes this by routing the output(s) of existing audio sources to existing audio outputs such that the user is able to move freely around their living space while enjoying a seamless listening experience.</p>
+  <p> Sound Track is meant to stream existing audio output from other applications and devices and route to other existing speakers and devices. It is not the media player software nor the speaker.</p>
 </div>
 
 <div id = "project-features">
@@ -34,20 +34,25 @@
   <p>Routing audio streams</p>
   <p>Software-based audio capture and playback Windows-based systems</p>
   <p>Software-based audio capture on Android-based mobile systems</p>
+  </blockquote>
   <p><strong>Priority 2</strong></p>
+  <blockquote>
   <p>Hardware-based audio playback to standalone speaker systems</p>
   <p>Handling for multiple users and their playback preferences</p>
   <p>Software-based audio capture and playback on iOS</p>
   <p>Management via webapp control panel</p>
+  </blockquote>
   <p><strong>Priority 3</strong></p>
+  <blockquote>
   <p>Hardware-based audio capture from non-computer/mobile sources</p>
   <p>Software-based audio capture and playback on Linux, macOS-based systems</p>
+  </blockquote>
 </div>
 
 <div id = "system-architecture">
 <hr>
   <h3 id="system-architecture">System Architecture</h3>
-  <p>Hardware</p>
+  <p><strong>Hardware</strong></p>
   <blockquote>
     <p>1x Central Server. Maintains Preference and Speaker Location databases, routes audio. Connects to audio capture and playback devices.</p>
     <p>2x min. location beacons/trackers. Stationary components for locating users in living space. </p>
@@ -55,7 +60,7 @@
     <p>1x min. Supported existing audio sources. Sends audio to Central Server.</p>
     <p>1x per user On-person tracking (may be the same as audio source, also potentially optional). Mobile component for locating users in living space.</p>
   </blockquote>
-  <p>Software</p>
+  <p><strong>Software</strong></p>
   <blockquote>
     <p>WebApp control panel for playback preference management. Runs on Central Server. User interacts through mobile or computer device. Interacts with system via a preference database.</p>
     <p>Database Management System for user(s) settings regarding music playback and initial setup, and for correlation between location information and audio playback devices. Runs on Central Server. WebApp control panel saves settings to database, while audio stream routing utilizes info in database.</p>
@@ -63,7 +68,7 @@
     <p>Audio stream routing. Utilizes location information and playback device correlation database to send user’s audio stream to appropriate playback device.</p>
     <p>Supplementary data collection for any data potentially relevant to decision-making. Sends data to central server for eventual decision-making. Most likely would target mobile platforms.</p>
   </blockquote>
-  <p>Network</p>
+  <p><strong>Network</strong></p>
   <blockquote>
     <p>Central Server, tracking devices, audio sources and audio playback devices connect via LAN/WLAN.</p>
   </blockquote>
@@ -72,14 +77,14 @@
 <div id = "selected-components">
 <hr>
   <h3 id = "selected-components">Selected Components</h3>
-    <p>Hardware</p>
+    <p><strong>Hardware</strong></p>
   <blockquote>
     <p>2x min. Estimote beacons</p>
     <p>1x min. Raspberry Pi</p>
     <p>2x min. Speakers</p>
     <p>1x min. Bluetooth-capable mobile device (most likely phone)</p>
   </blockquote>
-  <p>Software</p>
+  <p><strong>Software</strong></p>
   <blockquote>
     <p>MariaDB 10.2 Series</p>
     <p>Google Cast SDK</p>
