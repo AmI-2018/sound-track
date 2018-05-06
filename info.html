@@ -53,6 +53,7 @@
 <hr>
   <h3 id="system-architecture">System Architecture</h3>
   <p><strong>Hardware</strong></p>
+  <img src = "sys architecture (hardware).png" alt = "hardware diagram" stlye = "width:100px;height:100px;">
   <blockquote>
     <p>1x Central Server. Maintains Preference and Speaker Location databases, routes audio. Connects to audio capture and playback devices.</p>
     <p>2x min. location beacons/trackers. Stationary components for locating users in living space. </p>
@@ -61,6 +62,7 @@
     <p>1x per user On-person tracking (may be the same as audio source, also potentially optional). Mobile component for locating users in living space.</p>
   </blockquote>
   <p><strong>Software</strong></p>
+  <img src = "sys architecture (software).png" alt = "software diagram" stlye = "width:100px;height:100px;">
   <blockquote>
     <p>WebApp control panel for playback preference management. Runs on Central Server. User interacts through mobile or computer device. Interacts with system via a preference database.</p>
     <p>Database Management System for user(s) settings regarding music playback and initial setup, and for correlation between location information and audio playback devices. Runs on Central Server. WebApp control panel saves settings to database, while audio stream routing utilizes info in database.</p>
