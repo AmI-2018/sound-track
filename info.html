@@ -28,25 +28,25 @@
 <hr>
   <h3 id="project-features">Project Features</h3>
   <p><strong>Priority 1</strong></p>
-  <blockquote>
+  <ol type = "1">
   <p>Continuous tracking of user’s location</p>
   <p>Correlating location data to appropriate playback device</p>
   <p>Routing audio streams</p>
   <p>Software-based audio capture and playback Windows-based systems</p>
   <p>Software-based audio capture on Android-based mobile systems</p>
-  </blockquote>
+  </ol>
   <p><strong>Priority 2</strong></p>
-  <blockquote>
+  <ol type = "1", start = "6">
   <p>Hardware-based audio playback to standalone speaker systems</p>
   <p>Handling for multiple users and their playback preferences</p>
   <p>Software-based audio capture and playback on iOS</p>
   <p>Management via webapp control panel</p>
-  </blockquote>
+  </ol>
   <p><strong>Priority 3</strong></p>
-  <blockquote>
+  <ol type = "1", start = "10">
   <p>Hardware-based audio capture from non-computer/mobile sources</p>
   <p>Software-based audio capture and playback on Linux, macOS-based systems</p>
-  </blockquote>
+  </ol>
 </div>
 
 <div id = "system-architecture">
@@ -55,11 +55,11 @@
   <p><strong>Hardware</strong></p>
   <img src = "sys diagram (hardware).png" alt = "hardware diagram" stlye = "width:100px;height:100px;">
   <blockquote>
-    <p>1x Central Server. Maintains Preference and Speaker Location databases, routes audio. Connects to audio capture and playback devices.</p>
-    <p>2x min. location beacons/trackers. Stationary components for locating users in living space. </p>
-    <p>2x min. Supported existing audio playback devices (i.e. speakers). Receives and plays audio from Central Server.</p>
-    <p>1x min. Supported existing audio sources. Sends audio to Central Server.</p>
-    <p>1x per user On-person tracking (may be the same as audio source, also potentially optional). Mobile component for locating users in living space.</p>
+    <p>Central Server. Maintains Preference and Speaker Location databases, routes audio. Connects to audio capture and playback devices.</p>
+    <p>Location beacons/trackers. Stationary components for locating users in living space. </p>
+    <p>Supported existing audio playback devices (i.e. speakers). Receives and plays audio from Central Server.</p>
+    <p>Supported existing audio sources. Sends audio to Central Server.</p>
+    <p>On-person tracking (may be the same as audio source, also potentially optional). Mobile component for locating users in living space.</p>
   </blockquote>
   <p><strong>Software</strong></p>
   <img src = "sys diagram (software).png" alt = "software diagram" stlye = "width:100px;height:100px;">
