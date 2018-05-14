@@ -41,9 +41,6 @@ h6 {
   line-height: 0.1;
   }
 
-::selection { background: #745626; }
-::-moz-selection { background: #745626; }
-
 p a,
 p a:hover {
 	color: #d51722;
