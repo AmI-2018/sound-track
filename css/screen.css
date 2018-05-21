@@ -6,7 +6,7 @@ html { font-size: 100%; }
 html, body { height: 100%; }
 
 body {
-	font-family: Helvetica, Arial, sans-serif;
+  font-family: Helvetica, Arial, sans-serif;
 	font-size: 100%;
 	line-height: 1.5;
 	color: #000;
@@ -15,16 +15,17 @@ body {
 	background: #fff;
 	position: relative;
 	padding: 100px 30px 100px 30px;
+  word-wrap: break-word;
 }
 
 h1,h2,h3,h4,h5,h6 { 
   font-family: Helvetica, Arial, sans-serif;
+  word-wrap: break-word;
 }
 
 h1 {
   font-size: 420%;
 	margin: 0 0 0.1em;
-	font-family: Helvetica, Arial, sans-serif;
 }
 
 h2 { font-size: 22pt; }
@@ -51,24 +52,37 @@ p a:hover {
 #header {
   text-align: center;
   padding-bottom 30px;
+  word-wrap: break-word;
 }
 
 #alexander-holden {
   line-height: 1;
   float: left;
   width: 33%;
+  word-wrap: break-word;
+}
+@media (max-width: 768) {
+  #alexander-holden {float: none;}
 }
 
 #garrett-smith {
   line-height: 1; 
   float: left;
   width: 33%;
+  word-wrap: break-word;
+}
+@media (max-width: 768) {
+  #garrett-smith {float: none;}
 }
 
 #taylor-morgan {
   line-height: 1;
   float: left;
   width: 33%;
+  word-wrap: break-word;
+}
+@media (max-width: 768) {
+  #taylor-morgan {float: none;}
 }
 
 #ami-main-steps {
