@@ -15,12 +15,12 @@ body {
 	background: #fff;
 	position: relative;
 	padding: 100px 30px 100px 30px;
-  word-wrap: break-word;
+  	overflow-wrap: break-word;
 }
 
 h1,h2,h3,h4,h5,h6 { 
   font-family: Helvetica, Arial, sans-serif;
-  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 h1 {
@@ -62,7 +62,7 @@ p a:hover {
   word-wrap: break-word;
 }
 @media (max-width: 768) {
-  #alexander-holden {float: none;}
+  #alexander-holden {width:100%}
 }
 
 #garrett-smith {
@@ -72,7 +72,7 @@ p a:hover {
   word-wrap: break-word;
 }
 @media (max-width: 768) {
-  #garrett-smith {float: none;}
+  #garrett-smith {width:100%}
 }
 
 #taylor-morgan {
@@ -82,7 +82,7 @@ p a:hover {
   word-wrap: break-word;
 }
 @media (max-width: 768) {
-  #taylor-morgan {float: none;}
+  #taylor-morgan {width:100%}
 }
 
 #ami-main-steps {
@@ -99,23 +99,4 @@ p a:hover {
   list-style-type: none;
   padding: 0;
   line-height: 0.7;
-}
-
-pre {
-	background: rgba(0,0,0,0.3);
-	color: #fff;
-	padding: 20px 20px;
-	border-radius: 0.4em;
-	-moz-border-radius: 0.4em;
-	-webkit-border-radius: 0.4em;
-	overflow-x: hidden;
-}
-
-pre code {
-	font-size: 10pt;
-}
-
-.thumb { 
-    float:left;
-    margin: 10px;
 }
