@@ -60,13 +60,7 @@ p a:hover {
   float: left;
   width: 33%;
   word-wrap: break-word;
-}
-@media all and (max-width: 768) {
-  #alexander-holden {
-    display: block;
-    float: none;
-    width: 100%
-    }
+  min-width: 180px;
 }
 
 #garrett-smith {
@@ -74,13 +68,7 @@ p a:hover {
   float: left;
   width: 33%;
   word-wrap: break-word;
-}
-@media all and (max-width: 768) {
-  #garrett-smith {
-    display: block;
-    float: none;
-    width: 100%
-    }
+  min-width: 180px;
 }
 
 #taylor-morgan {
@@ -88,13 +76,7 @@ p a:hover {
   float: left;
   width: 33%;
   word-wrap: break-word;
-}
-@media all and (max-width: 768) {
-  #taylor-morgan {
-    display: block;
-    float: none;
-    width: 100%
-    }
+  min-width: 180px;
 }
 
 #ami-main-steps {
