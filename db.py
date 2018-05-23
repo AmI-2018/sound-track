@@ -1,13 +1,12 @@
 import pymysql.cursors
 
-from config import HOST, PORT, USER, PASS
+from config import USER, PASS, SOCK
 
 # gets our connection to the database
 def get_connection():
-    connection = pymysql.connect(host = HOST,
-                                 port = PORT,
-                                 user = USER,
+    connection = pymysql.connect(user = USER,
                                  password = PASS,
+                                 unix_socket = SOCK,
                                  db='sound-track',
                                  charset='utf8mb4',
                                  cursorclass=pymysql.cursors.DictCursor)
@@ -39,7 +38,7 @@ def get_speaker(BeaconID):
     finally:
         connection.close()
 
-return SpeakerID
+    return SpeakerID
 
 
 #given a string:BeaconID and a string:SpeakerID, add the Beacon:Speaker pair to the database
@@ -93,12 +92,14 @@ def update_beacon(BeaconID, SpeakerID):
 def get_all_beacons():
 
     sql = "SELECT * FROM Beacons;"
+    
+    beacons = []
 
     connection = get_connection()
 
     try:
         cursor = connection.cursor()
-        cursor.execute(sql, (SpeakerID, BeaconID))
+        cursor.execute(sql)
 
         beacons = cursor.fetchall()
         
