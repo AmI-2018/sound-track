@@ -6,12 +6,7 @@ idna==2.6
 itsdangerous==0.24
 Jinja2==2.10
 MarkupSafe==1.0
-netifaces==0.10.7
-protobuf==3.5.2.post1
-PyChromecast==2.2.0
 PyMySQL==0.8.1
 requests==2.18.4
-six==1.11.0
 urllib3==1.22
 Werkzeug==0.14.1
-zeroconf==0.20.0
