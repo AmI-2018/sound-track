@@ -1,0 +1,122 @@
+-- Merging decision tree log ---
+manifest
+ADDED from C:\Users\Zee\Documents\AndroidStudioProjects\soundtrack\app\src\main\AndroidManifest.xml:2:1-24:12
+INJECTED from C:\Users\Zee\Documents\AndroidStudioProjects\soundtrack\app\src\main\AndroidManifest.xml:2:1-24:12
+INJECTED from C:\Users\Zee\Documents\AndroidStudioProjects\soundtrack\app\src\main\AndroidManifest.xml:2:1-24:12
+INJECTED from C:\Users\Zee\Documents\AndroidStudioProjects\soundtrack\app\src\main\AndroidManifest.xml:2:1-24:12
+MERGED from [com.android.support:design:27.1.1] C:\Users\Zee\.gradle\caches\transforms-1\files-1.1\design-27.1.1.aar\3e5c569042837ede4b41c3f7768523f6\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:appcompat-v7:27.1.1] C:\Users\Zee\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.1.1.aar\e8ef0471782522530b861bc589e564f4\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support.constraint:constraint-layout:1.1.0] C:\Users\Zee\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.0.aar\438f96cfebe751e089001d2dd528e1bd\AndroidManifest.xml:2:1-11:12
+MERGED from [com.android.support:support-v4:27.1.1] C:\Users\Zee\.gradle\caches\transforms-1\files-1.1\support-v4-27.1.1.aar\478f52dfe04d37b16821cfb4b2a217ec\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-fragment:27.1.1] C:\Users\Zee\.gradle\caches\transforms-1\files-1.1\support-fragment-27.1.1.aar\29d47c71fd3173b1d70311b16082551d\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:animated-vector-drawable:27.1.1] C:\Users\Zee\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-27.1.1.aar\be8e42a8a4aef1f7d9293c5cc6733749\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:recyclerview-v7:27.1.1] C:\Users\Zee\.gradle\caches\transforms-1\files-1.1\recyclerview-v7-27.1.1.aar\cd01533dedb62116e785ad11eb43596d\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-ui:27.1.1] C:\Users\Zee\.gradle\caches\transforms-1\files-1.1\support-core-ui-27.1.1.aar\4334ddb1c5593db457b832523c949773\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-utils:27.1.1] C:\Users\Zee\.gradle\caches\transforms-1\files-1.1\support-core-utils-27.1.1.aar\b4a9688521781f94b2cbbdc3b76ab019\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-vector-drawable:27.1.1] C:\Users\Zee\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-27.1.1.aar\5e5ec83120311aaf784abd4e8c7d975c\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:transition:27.1.1] C:\Users\Zee\.gradle\caches\transforms-1\files-1.1\transition-27.1.1.aar\a8f81c7d0a8cd00260e9e2958553dae7\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-media-compat:27.1.1] C:\Users\Zee\.gradle\caches\transforms-1\files-1.1\support-media-compat-27.1.1.aar\109d25d45b7d30c1c5293177196bbb8e\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-compat:27.1.1] C:\Users\Zee\.gradle\caches\transforms-1\files-1.1\support-compat-27.1.1.aar\a45f8ed8fbf368b37ca1efa24e59488f\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata-core:1.1.0] C:\Users\Zee\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.0.aar\03039c0228dd4a15d614bcf7b0c0d96e\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:viewmodel:1.1.0] C:\Users\Zee\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.0.aar\9ef8e453db1f1d31f14ee21d61e49790\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:runtime:1.1.0] C:\Users\Zee\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\592db779209007b86b40757f570e6b47\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.core:runtime:1.1.0] C:\Users\Zee\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\30cba162b982cadc5ec66ee50a9af5c2\AndroidManifest.xml:17:1-22:12
+INJECTED from C:\Users\Zee\Documents\AndroidStudioProjects\soundtrack\app\src\main\AndroidManifest.xml:2:1-24:12
+INJECTED from C:\Users\Zee\Documents\AndroidStudioProjects\soundtrack\app\src\main\AndroidManifest.xml:2:1-24:12
+INJECTED from C:\Users\Zee\Documents\AndroidStudioProjects\soundtrack\app\src\main\AndroidManifest.xml:2:1-24:12
+	package
+		ADDED from C:\Users\Zee\Documents\AndroidStudioProjects\soundtrack\app\src\main\AndroidManifest.xml:3:5-41
+		INJECTED from C:\Users\Zee\Documents\AndroidStudioProjects\soundtrack\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Zee\Documents\AndroidStudioProjects\soundtrack\app\src\main\AndroidManifest.xml
+	android:versionName
+		INJECTED from C:\Users\Zee\Documents\AndroidStudioProjects\soundtrack\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\Zee\Documents\AndroidStudioProjects\soundtrack\app\src\main\AndroidManifest.xml:2:1-24:12
+		INJECTED from C:\Users\Zee\Documents\AndroidStudioProjects\soundtrack\app\src\main\AndroidManifest.xml
+	android:versionCode
+		INJECTED from C:\Users\Zee\Documents\AndroidStudioProjects\soundtrack\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\Zee\Documents\AndroidStudioProjects\soundtrack\app\src\main\AndroidManifest.xml:2:1-24:12
+		INJECTED from C:\Users\Zee\Documents\AndroidStudioProjects\soundtrack\app\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from C:\Users\Zee\Documents\AndroidStudioProjects\soundtrack\app\src\main\AndroidManifest.xml:2:11-69
+application
+ADDED from C:\Users\Zee\Documents\AndroidStudioProjects\soundtrack\app\src\main\AndroidManifest.xml:5:5-22:19
+MERGED from [com.android.support.constraint:constraint-layout:1.1.0] C:\Users\Zee\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.0.aar\438f96cfebe751e089001d2dd528e1bd\AndroidManifest.xml:9:5-20
+MERGED from [com.android.support.constraint:constraint-layout:1.1.0] C:\Users\Zee\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.0.aar\438f96cfebe751e089001d2dd528e1bd\AndroidManifest.xml:9:5-20
+	android:supportsRtl
+		ADDED from C:\Users\Zee\Documents\AndroidStudioProjects\soundtrack\app\src\main\AndroidManifest.xml:10:9-35
+	android:label
+		ADDED from C:\Users\Zee\Documents\AndroidStudioProjects\soundtrack\app\src\main\AndroidManifest.xml:8:9-41
+	android:roundIcon
+		ADDED from C:\Users\Zee\Documents\AndroidStudioProjects\soundtrack\app\src\main\AndroidManifest.xml:9:9-54
+	android:icon
+		ADDED from C:\Users\Zee\Documents\AndroidStudioProjects\soundtrack\app\src\main\AndroidManifest.xml:7:9-43
+	android:allowBackup
+		ADDED from C:\Users\Zee\Documents\AndroidStudioProjects\soundtrack\app\src\main\AndroidManifest.xml:6:9-35
+	android:theme
+		ADDED from C:\Users\Zee\Documents\AndroidStudioProjects\soundtrack\app\src\main\AndroidManifest.xml:11:9-40
+activity#com.sound_track.soundtrack.playbackActivity
+ADDED from C:\Users\Zee\Documents\AndroidStudioProjects\soundtrack\app\src\main\AndroidManifest.xml:12:9-21:20
+	android:label
+		ADDED from C:\Users\Zee\Documents\AndroidStudioProjects\soundtrack\app\src\main\AndroidManifest.xml:14:13-45
+	android:theme
+		ADDED from C:\Users\Zee\Documents\AndroidStudioProjects\soundtrack\app\src\main\AndroidManifest.xml:15:13-56
+	android:name
+		ADDED from C:\Users\Zee\Documents\AndroidStudioProjects\soundtrack\app\src\main\AndroidManifest.xml:13:13-45
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from C:\Users\Zee\Documents\AndroidStudioProjects\soundtrack\app\src\main\AndroidManifest.xml:16:13-20:29
+action#android.intent.action.MAIN
+ADDED from C:\Users\Zee\Documents\AndroidStudioProjects\soundtrack\app\src\main\AndroidManifest.xml:17:17-69
+	android:name
+		ADDED from C:\Users\Zee\Documents\AndroidStudioProjects\soundtrack\app\src\main\AndroidManifest.xml:17:25-66
+category#android.intent.category.LAUNCHER
+ADDED from C:\Users\Zee\Documents\AndroidStudioProjects\soundtrack\app\src\main\AndroidManifest.xml:19:17-77
+	android:name
+		ADDED from C:\Users\Zee\Documents\AndroidStudioProjects\soundtrack\app\src\main\AndroidManifest.xml:19:27-74
+uses-sdk
+INJECTED from C:\Users\Zee\Documents\AndroidStudioProjects\soundtrack\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from C:\Users\Zee\Documents\AndroidStudioProjects\soundtrack\app\src\main\AndroidManifest.xml
+INJECTED from C:\Users\Zee\Documents\AndroidStudioProjects\soundtrack\app\src\main\AndroidManifest.xml
+MERGED from [com.android.support:design:27.1.1] C:\Users\Zee\.gradle\caches\transforms-1\files-1.1\design-27.1.1.aar\3e5c569042837ede4b41c3f7768523f6\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:design:27.1.1] C:\Users\Zee\.gradle\caches\transforms-1\files-1.1\design-27.1.1.aar\3e5c569042837ede4b41c3f7768523f6\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:27.1.1] C:\Users\Zee\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.1.1.aar\e8ef0471782522530b861bc589e564f4\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:27.1.1] C:\Users\Zee\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.1.1.aar\e8ef0471782522530b861bc589e564f4\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support.constraint:constraint-layout:1.1.0] C:\Users\Zee\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.0.aar\438f96cfebe751e089001d2dd528e1bd\AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support.constraint:constraint-layout:1.1.0] C:\Users\Zee\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.0.aar\438f96cfebe751e089001d2dd528e1bd\AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support:support-v4:27.1.1] C:\Users\Zee\.gradle\caches\transforms-1\files-1.1\support-v4-27.1.1.aar\478f52dfe04d37b16821cfb4b2a217ec\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-v4:27.1.1] C:\Users\Zee\.gradle\caches\transforms-1\files-1.1\support-v4-27.1.1.aar\478f52dfe04d37b16821cfb4b2a217ec\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:27.1.1] C:\Users\Zee\.gradle\caches\transforms-1\files-1.1\support-fragment-27.1.1.aar\29d47c71fd3173b1d70311b16082551d\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:27.1.1] C:\Users\Zee\.gradle\caches\transforms-1\files-1.1\support-fragment-27.1.1.aar\29d47c71fd3173b1d70311b16082551d\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:27.1.1] C:\Users\Zee\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-27.1.1.aar\be8e42a8a4aef1f7d9293c5cc6733749\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:27.1.1] C:\Users\Zee\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-27.1.1.aar\be8e42a8a4aef1f7d9293c5cc6733749\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:recyclerview-v7:27.1.1] C:\Users\Zee\.gradle\caches\transforms-1\files-1.1\recyclerview-v7-27.1.1.aar\cd01533dedb62116e785ad11eb43596d\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:recyclerview-v7:27.1.1] C:\Users\Zee\.gradle\caches\transforms-1\files-1.1\recyclerview-v7-27.1.1.aar\cd01533dedb62116e785ad11eb43596d\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:27.1.1] C:\Users\Zee\.gradle\caches\transforms-1\files-1.1\support-core-ui-27.1.1.aar\4334ddb1c5593db457b832523c949773\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:27.1.1] C:\Users\Zee\.gradle\caches\transforms-1\files-1.1\support-core-ui-27.1.1.aar\4334ddb1c5593db457b832523c949773\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:27.1.1] C:\Users\Zee\.gradle\caches\transforms-1\files-1.1\support-core-utils-27.1.1.aar\b4a9688521781f94b2cbbdc3b76ab019\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:27.1.1] C:\Users\Zee\.gradle\caches\transforms-1\files-1.1\support-core-utils-27.1.1.aar\b4a9688521781f94b2cbbdc3b76ab019\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:27.1.1] C:\Users\Zee\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-27.1.1.aar\5e5ec83120311aaf784abd4e8c7d975c\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:27.1.1] C:\Users\Zee\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-27.1.1.aar\5e5ec83120311aaf784abd4e8c7d975c\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:transition:27.1.1] C:\Users\Zee\.gradle\caches\transforms-1\files-1.1\transition-27.1.1.aar\a8f81c7d0a8cd00260e9e2958553dae7\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:transition:27.1.1] C:\Users\Zee\.gradle\caches\transforms-1\files-1.1\transition-27.1.1.aar\a8f81c7d0a8cd00260e9e2958553dae7\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-media-compat:27.1.1] C:\Users\Zee\.gradle\caches\transforms-1\files-1.1\support-media-compat-27.1.1.aar\109d25d45b7d30c1c5293177196bbb8e\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-media-compat:27.1.1] C:\Users\Zee\.gradle\caches\transforms-1\files-1.1\support-media-compat-27.1.1.aar\109d25d45b7d30c1c5293177196bbb8e\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:27.1.1] C:\Users\Zee\.gradle\caches\transforms-1\files-1.1\support-compat-27.1.1.aar\a45f8ed8fbf368b37ca1efa24e59488f\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:27.1.1] C:\Users\Zee\.gradle\caches\transforms-1\files-1.1\support-compat-27.1.1.aar\a45f8ed8fbf368b37ca1efa24e59488f\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.0] C:\Users\Zee\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.0.aar\03039c0228dd4a15d614bcf7b0c0d96e\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.0] C:\Users\Zee\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.0.aar\03039c0228dd4a15d614bcf7b0c0d96e\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.0] C:\Users\Zee\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.0.aar\9ef8e453db1f1d31f14ee21d61e49790\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.0] C:\Users\Zee\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.0.aar\9ef8e453db1f1d31f14ee21d61e49790\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.0] C:\Users\Zee\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\592db779209007b86b40757f570e6b47\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.0] C:\Users\Zee\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\592db779209007b86b40757f570e6b47\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.0] C:\Users\Zee\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\30cba162b982cadc5ec66ee50a9af5c2\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.0] C:\Users\Zee\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\30cba162b982cadc5ec66ee50a9af5c2\AndroidManifest.xml:20:5-44
+INJECTED from C:\Users\Zee\Documents\AndroidStudioProjects\soundtrack\app\src\main\AndroidManifest.xml
+INJECTED from C:\Users\Zee\Documents\AndroidStudioProjects\soundtrack\app\src\main\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from C:\Users\Zee\Documents\AndroidStudioProjects\soundtrack\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\Zee\Documents\AndroidStudioProjects\soundtrack\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Zee\Documents\AndroidStudioProjects\soundtrack\app\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from C:\Users\Zee\Documents\AndroidStudioProjects\soundtrack\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\Zee\Documents\AndroidStudioProjects\soundtrack\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Zee\Documents\AndroidStudioProjects\soundtrack\app\src\main\AndroidManifest.xml
