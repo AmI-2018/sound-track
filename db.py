@@ -13,13 +13,11 @@ def get_connection():
 
     return connection
 
-
-#given a string:BeaconID, return a string:SpeakerID
-def get_speaker(BeaconID):
+def get_ip(BeaconID):
     
     connection = get_connection()
 
-    sql = "SELECT SpeakerID FROM Beacons WHERE BeaconID = %s;"
+    sql = "SELECT IPAddr FROM Beacons WHERE BeaconID = %s;"
 
     try:
         cursor = connection.cursor()
@@ -30,34 +28,31 @@ def get_speaker(BeaconID):
         SpeakerID = ''
 
         if not output:
-            SpeakerID = 'NoSpeakerIDFound'
+            IPAddr = 'NoIPAddrFound'
         
         else:
-            SpeakerID = output['SpeakerID']
+            IPAddr = output['IPAddr']
 
     finally:
         connection.close()
 
-    return SpeakerID
+    return IPAddr
 
-
-#given a string:BeaconID and a string:SpeakerID, add the Beacon:Speaker pair to the database
-def add_beacon(BeaconID, SpeakerID):
+def add_location(BeaconID, SpeakerID, IPAddr):
     #open the connection to the database
     connection = get_connection()
 
-    sql = "INSERT INTO Beacons (BeaconID, SpeakerID) VALUES (%s, %s);"
+    sql = "INSERT INTO Beacons (BeaconID, SpeakerID, IPAddr) VALUES (%s, %s, %s);"
 
     try:
         cursor = connection.cursor()
-        cursor.execute(sql, (BeaconID, SpeakerID))
+        cursor.execute(sql, (BeaconID, SpeakerID, IPAddr))
         connection.commit()
 
     finally:
         connection.close()
 
-#given a string:BeaconID, delete the beacon and all associated speakers from the database
-def delete_beacon(BeaconID):
+def delete_location(BeaconID):
     #open the connection to the database
     connection = get_connection()
 
@@ -73,23 +68,22 @@ def delete_beacon(BeaconID):
     finally:
         connection.close()
 
-#given a string:BeaconID and string:SpeakerID, change the Speaker paired with specified beacon
-def update_beacon(BeaconID, SpeakerID):
+def update_speaker(BeaconID, IPAddr):
 
-    sql = "UPDATE Beacons SET SpeakerID = %s WHERE BeaconID = %s;"
+    sql = "UPDATE Beacons SET IPAddr = %s WHERE BeaconID = %s;"
 
     connection = get_connection()
 
     try:
         cursor = connection.cursor()
-        cursor.execute(sql, (SpeakerID, BeaconID))
+        cursor.execute(sql, (IPAddr, BeaconID))
         connection.commit()
 
     finally:
         connection.close()
 
 #list all Beacons and their paired Speakers in database
-def get_all_beacons():
+def get_all_locations():
 
     sql = "SELECT * FROM Beacons;"
     
