@@ -1,0 +1,11 @@
+C:\Users\Zee\source\repos\Sound-Track-Win\Sound-Track-Win\bin\Debug\Sound-Track-Win.exe.config
+C:\Users\Zee\source\repos\Sound-Track-Win\Sound-Track-Win\bin\Debug\Sound-Track-Win.exe
+C:\Users\Zee\source\repos\Sound-Track-Win\Sound-Track-Win\bin\Debug\Sound-Track-Win.pdb
+C:\Users\Zee\source\repos\Sound-Track-Win\Sound-Track-Win\obj\Debug\Sound-Track-Win.csprojAssemblyReference.cache
+C:\Users\Zee\source\repos\Sound-Track-Win\Sound-Track-Win\obj\Debug\Sound_Track_Win.Properties.Resources.resources
+C:\Users\Zee\source\repos\Sound-Track-Win\Sound-Track-Win\obj\Debug\Sound-Track-Win.csproj.GenerateResource.cache
+C:\Users\Zee\source\repos\Sound-Track-Win\Sound-Track-Win\obj\Debug\Sound-Track-Win.csproj.CoreCompileInputs.cache
+C:\Users\Zee\source\repos\Sound-Track-Win\Sound-Track-Win\obj\Debug\Sound-Track-Win.exe
+C:\Users\Zee\source\repos\Sound-Track-Win\Sound-Track-Win\obj\Debug\Sound-Track-Win.pdb
+C:\Users\Zee\source\repos\Sound-Track-Win\Sound-Track-Win\obj\Debug\Sound_Track_Win.formST.resources
+C:\Users\Zee\source\repos\Sound-Track-Win\Sound-Track-Win\obj\Debug\Sound_Track_Win.userSettingsForm.resources
