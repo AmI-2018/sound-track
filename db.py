@@ -13,54 +13,54 @@ def get_connection():
 
     return connection
 
-def get_ip(BeaconID):
+def get_ip(beacon_id):
     
     connection = get_connection()
 
-    sql = "SELECT IPAddr FROM Beacons WHERE BeaconID = %s;"
+    sql = "SELECT ip_addr FROM Beacons WHERE beacon_id = %s;"
 
     try:
         cursor = connection.cursor()
-        cursor.execute(sql, BeaconID)
+        cursor.execute(sql, beacon_id)
         
         output = cursor.fetchall()
 
-        SpeakerID = ''
+        speaker__id = ''
 
         if not output:
-            IPAddr = 'NoIPAddrFound'
+            ip_addr = 'NoIPFound'
         
         else:
-            IPAddr = output['IPAddr']
+            ip_addr = output['ip_addr']
 
     finally:
         connection.close()
 
-    return IPAddr
+    return ip_addr
 
-def add_location(BeaconID, SpeakerID, IPAddr):
+def add_location(beacon_id, speaker_id, ip_addr):
     #open the connection to the database
     connection = get_connection()
 
-    sql = "INSERT INTO Beacons (BeaconID, SpeakerID, IPAddr) VALUES (%s, %s, %s);"
+    sql = "INSERT INTO Beacons (beacon_id, speaker_id, ip_addr) VALUES (%s, %s, %s);"
 
     try:
         cursor = connection.cursor()
-        cursor.execute(sql, (BeaconID, SpeakerID, IPAddr))
+        cursor.execute(sql, (beacon_id, speaker_id, ip_addr))
         connection.commit()
 
     finally:
         connection.close()
 
-def delete_location(BeaconID):
+def delete_location(beacon_id):
     #open the connection to the database
     connection = get_connection()
 
-    sql = "DELETE FROM Beacons WHERE BeaconID = %s;"
+    sql = "DELETE FROM Beacons WHERE beacon_id = %s;"
 
     try:
         cursor = connection.cursor()
-        cursor.execute(sql, BeaconID)
+        cursor.execute(sql, beacon_id)
         connection.commit()
 
 
@@ -68,15 +68,15 @@ def delete_location(BeaconID):
     finally:
         connection.close()
 
-def update_speaker(BeaconID, IPAddr):
+def update_speaker(beacon_id, ip_addr):
 
-    sql = "UPDATE Beacons SET IPAddr = %s WHERE BeaconID = %s;"
+    sql = "UPDATE Beacons SET ip_addr = %s WHERE beacon_id = %s;"
 
     connection = get_connection()
 
     try:
         cursor = connection.cursor()
-        cursor.execute(sql, (IPAddr, BeaconID))
+        cursor.execute(sql, (ip_addr, beacon_id))
         connection.commit()
 
     finally:

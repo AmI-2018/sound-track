@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 from tempfile import TemporaryFile
 import db
+import time
 
 api = Flask(__name__)
 
@@ -33,7 +34,7 @@ def get_current_location():
     except:
         return jsonify({'message': "no current_location set"})
 
-#adds location given BeaconID, SpeakerID and IP Address of client Pi
+#adds location given BeaconID, SpeakerID, and IP Address of client Pi
 @api.route('/locations', methods = ['POST'])
 def add_location():
     if request.headers['Content-Type'] == 'application/json':
@@ -54,7 +55,7 @@ def add_location():
 
 
 
-#returns all locations BeaconID, SpeakerID and IPAddress of client Pi
+#returns all locations BeaconID, SpeakerID, and IPAddress of client Pi
 @api.route('/locations', methods = ['GET'])
 def get_all_locations():
 
@@ -64,6 +65,29 @@ def get_all_locations():
         return jsonify({'message': "no locations found"})
     
     return jsonify({'locations': db.get_all_locations()})
+
+# Returns speaker_id, location_name, and ip_addr of specified beacon (GET Identifier)
+
+# Updates specified elements of selected beacon (PUT Identifier)
+
+# Returns server's time
+@api.route('/time', methods = ['GET'])
+def get_server_time():
+    return jsonify({'time': time.time()})
+
+# Notifies server that user is still active (PUT Identifier)
+
+# Notifies server that device speaker is still active (PUT Identifier)
+
+# Returns all users and sleep settings (GET Resource)
+
+# Creates new user entry (POST)
+
+# Returns sleep settings and name for specified user (GET Identifier)
+
+# Update specified elements of selected user (Put Identifier)
+
+
 
 if __name__ == '__main__':
     api.run()

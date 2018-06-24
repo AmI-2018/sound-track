@@ -22,13 +22,13 @@
 DROP TABLE IF EXISTS `Beacons`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Beacons` (
-  `BeaconID` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `SpeakerID` int(11) NOT NULL DEFAULT '-1',
-  `IPAddr` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`BeaconID`),
-  UNIQUE KEY `IPAddr` (`IPAddr`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE "Beacons" (
+    beacon_id VARCHAR(128) NOT NULL,
+    speaker_id INT,
+    ip_addr VARCHAR(32) NOT NULL,
+    location_name VARCHAR(255),
+    PRIMARY KEY ("BeaconID")
+)
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -47,11 +47,25 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `Settings`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Settings` (
-  `UserID` int(11) NOT NULL DEFAULT '-1',
-  `UserName` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`UserID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE "Settings" (
+    user_id INT,
+    user_name VARCHAR(255) DEFAULT NULL,
+    mon_start INT DEFAULT -1,
+    mon_end INT DEFAULT -1,
+    tue_start INT DEFAULT -1,
+    tue_end INT DEFAULT -1,
+    wed_start INT DEFAULT -1,
+    wed_end INT DEFAULT -1,
+    thr_start INT DEFAULT -1,
+    thr_end INT DEFAULT -1,
+    fri_start INT DEFAULT -1,
+    fri_end INT DEFAULT -1,
+    sat_start INT DEFAULT -1,
+    sat_end INT DEFAULT -1,
+    sun_start INT DEFAULT -1,
+    sun_end INT DEFAULT -1,
+    PRIMARY KEY ("UserID")
+)
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
