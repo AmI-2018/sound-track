@@ -27,7 +27,7 @@ CREATE TABLE "Beacons" (
     speaker_id INT,
     ip_addr VARCHAR(32) NOT NULL,
     location_name VARCHAR(255),
-    PRIMARY KEY ("BeaconID")
+    PRIMARY KEY ("beacon_id")
 )
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -64,7 +64,7 @@ CREATE TABLE "Settings" (
     sat_end INT DEFAULT -1,
     sun_start INT DEFAULT -1,
     sun_end INT DEFAULT -1,
-    PRIMARY KEY ("UserID")
+    PRIMARY KEY ("user_id")
 )
 /*!40101 SET character_set_client = @saved_cs_client */;
 
