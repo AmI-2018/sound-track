@@ -31,30 +31,75 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(formST));
             this.notifyIconST = new System.Windows.Forms.NotifyIcon(this.components);
-            this.label1 = new System.Windows.Forms.Label();
-            this.statusDisplay = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.rbTracker = new System.Windows.Forms.RadioButton();
-            this.rbOutput = new System.Windows.Forms.RadioButton();
-            this.btnUser = new System.Windows.Forms.Button();
-            this.process1 = new System.Diagnostics.Process();
-            this.btnSystem = new System.Windows.Forms.Button();
             this.trayContextStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.showMI = new System.Windows.Forms.ToolStripMenuItem();
             this.userSettingsMI = new System.Windows.Forms.ToolStripMenuItem();
             this.systemSettingsMI = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitMI = new System.Windows.Forms.ToolStripMenuItem();
-            this.groupBox1.SuspendLayout();
+            this.label1 = new System.Windows.Forms.Label();
+            this.statusDisplay = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.rbTracker = new System.Windows.Forms.RadioButton();
+            this.rbOutput = new System.Windows.Forms.RadioButton();
+            this.btnUser = new System.Windows.Forms.Button();
+            this.btnSystem = new System.Windows.Forms.Button();
+            this.audioWorker = new System.ComponentModel.BackgroundWorker();
+            this.restBTWorker = new System.ComponentModel.BackgroundWorker();
             this.trayContextStrip.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // notifyIconST
             // 
             this.notifyIconST.ContextMenuStrip = this.trayContextStrip;
             this.notifyIconST.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIconST.Icon")));
-            this.notifyIconST.Text = "notifyIcon1";
+            this.notifyIconST.Text = "Sound Track";
             this.notifyIconST.Visible = true;
+            // 
+            // trayContextStrip
+            // 
+            this.trayContextStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.trayContextStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.showMI,
+            this.userSettingsMI,
+            this.systemSettingsMI,
+            this.toolStripMenuItem1,
+            this.exitMI});
+            this.trayContextStrip.Name = "trayContextStrip";
+            this.trayContextStrip.Size = new System.Drawing.Size(183, 106);
+            // 
+            // showMI
+            // 
+            this.showMI.Name = "showMI";
+            this.showMI.Size = new System.Drawing.Size(182, 24);
+            this.showMI.Text = "Show";
+            this.showMI.Click += new System.EventHandler(this.showForm);
+            // 
+            // userSettingsMI
+            // 
+            this.userSettingsMI.Name = "userSettingsMI";
+            this.userSettingsMI.Size = new System.Drawing.Size(182, 24);
+            this.userSettingsMI.Text = "User Settings";
+            this.userSettingsMI.Click += new System.EventHandler(this.btnUser_Click);
+            // 
+            // systemSettingsMI
+            // 
+            this.systemSettingsMI.Name = "systemSettingsMI";
+            this.systemSettingsMI.Size = new System.Drawing.Size(182, 24);
+            this.systemSettingsMI.Text = "System Settings";
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(179, 6);
+            // 
+            // exitMI
+            // 
+            this.exitMI.Name = "exitMI";
+            this.exitMI.Size = new System.Drawing.Size(182, 24);
+            this.exitMI.Text = "Exit";
+            this.exitMI.Click += new System.EventHandler(this.closeForm);
             // 
             // label1
             // 
@@ -121,16 +166,7 @@
             this.btnUser.TabIndex = 3;
             this.btnUser.Text = "User Settings";
             this.btnUser.UseVisualStyleBackColor = true;
-            // 
-            // process1
-            // 
-            this.process1.StartInfo.Domain = "";
-            this.process1.StartInfo.LoadUserProfile = false;
-            this.process1.StartInfo.Password = null;
-            this.process1.StartInfo.StandardErrorEncoding = null;
-            this.process1.StartInfo.StandardOutputEncoding = null;
-            this.process1.StartInfo.UserName = "";
-            this.process1.SynchronizingObject = this;
+            this.btnUser.Click += new System.EventHandler(this.btnUser_Click);
             // 
             // btnSystem
             // 
@@ -141,48 +177,6 @@
             this.btnSystem.TabIndex = 3;
             this.btnSystem.Text = "System Settings";
             this.btnSystem.UseVisualStyleBackColor = true;
-            // 
-            // trayContextStrip
-            // 
-            this.trayContextStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.trayContextStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.showMI,
-            this.userSettingsMI,
-            this.systemSettingsMI,
-            this.toolStripMenuItem1,
-            this.exitMI});
-            this.trayContextStrip.Name = "trayContextStrip";
-            this.trayContextStrip.Size = new System.Drawing.Size(211, 134);
-            // 
-            // showMI
-            // 
-            this.showMI.Name = "showMI";
-            this.showMI.Size = new System.Drawing.Size(210, 24);
-            this.showMI.Text = "Show";
-            this.showMI.Click += new System.EventHandler(this.showForm);
-            // 
-            // userSettingsMI
-            // 
-            this.userSettingsMI.Name = "userSettingsMI";
-            this.userSettingsMI.Size = new System.Drawing.Size(210, 24);
-            this.userSettingsMI.Text = "User Settings";
-            // 
-            // systemSettingsMI
-            // 
-            this.systemSettingsMI.Name = "systemSettingsMI";
-            this.systemSettingsMI.Size = new System.Drawing.Size(210, 24);
-            this.systemSettingsMI.Text = "System Settings";
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(207, 6);
-            // 
-            // exitMI
-            // 
-            this.exitMI.Name = "exitMI";
-            this.exitMI.Size = new System.Drawing.Size(210, 24);
-            this.exitMI.Text = "Exit";
             // 
             // formST
             // 
@@ -203,9 +197,9 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Sound Track";
             this.SizeChanged += new System.EventHandler(this.formST_SizeChanged);
+            this.trayContextStrip.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.trayContextStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -220,7 +214,6 @@
         private System.Windows.Forms.RadioButton rbTracker;
         private System.Windows.Forms.RadioButton rbOutput;
         private System.Windows.Forms.Button btnUser;
-        private System.Diagnostics.Process process1;
         private System.Windows.Forms.Button btnSystem;
         private System.Windows.Forms.ContextMenuStrip trayContextStrip;
         private System.Windows.Forms.ToolStripMenuItem showMI;
@@ -228,6 +221,8 @@
         private System.Windows.Forms.ToolStripMenuItem systemSettingsMI;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem exitMI;
+        private System.ComponentModel.BackgroundWorker audioWorker;
+        private System.ComponentModel.BackgroundWorker restBTWorker;
     }
 }
 

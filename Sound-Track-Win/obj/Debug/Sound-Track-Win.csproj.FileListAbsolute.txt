@@ -9,3 +9,7 @@ C:\Users\Zee\source\repos\Sound-Track-Win\Sound-Track-Win\obj\Debug\Sound-Track-
 C:\Users\Zee\source\repos\Sound-Track-Win\Sound-Track-Win\obj\Debug\Sound-Track-Win.pdb
 C:\Users\Zee\source\repos\Sound-Track-Win\Sound-Track-Win\obj\Debug\Sound_Track_Win.formST.resources
 C:\Users\Zee\source\repos\Sound-Track-Win\Sound-Track-Win\obj\Debug\Sound_Track_Win.userSettingsForm.resources
+C:\Users\Zee\source\repos\Sound-Track-Win\Sound-Track-Win\bin\Debug\System.Net.Http.Formatting.dll
+C:\Users\Zee\source\repos\Sound-Track-Win\Sound-Track-Win\obj\Debug\Sound-Track-Win.csproj.CopyComplete
+C:\Users\Zee\source\repos\Sound-Track-Win\Sound-Track-Win\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Zee\source\repos\Sound-Track-Win\Sound-Track-Win\bin\Debug\Newtonsoft.Json.xml
