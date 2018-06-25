@@ -14,7 +14,7 @@ current_location = TemporaryFile()
 def set_location():
     if request.headers['Content-Type'] == 'application/json':
         
-        current_location = request.json['BeaconID']
+        current_location = request.json['beacon_id']
 
         response = jsonify({'message': "POST Successful"})
 
@@ -29,18 +29,18 @@ def set_location():
 def get_current_location():
     
     try:
-        return jsonify({'BeaconID': current_location})
+        return jsonify({'beacon_id': current_location})
 
     except:
         return jsonify({'message': "no current_location set"})
 
-#adds location given BeaconID, SpeakerID, and IP Address of client Pi
+#adds location given beacon_id, SpeakerID, and IP Address of client Pi
 @api.route('/locations', methods = ['POST'])
 def add_location():
     if request.headers['Content-Type'] == 'application/json':
 
         try:
-            db.add_location(request.json['BeaconID'], request.json['SpeakerID'], request.json['IPAddr'])
+            db.add_location(request.json['beacon_id'], request.json['SpeakerID'], request.json['IPAddr'])
 
         except:
 
@@ -55,7 +55,7 @@ def add_location():
 
 
 
-#returns all locations BeaconID, SpeakerID, and IPAddress of client Pi
+#returns all locations, SpeakerID, and IPAddress of client Pi
 @api.route('/locations', methods = ['GET'])
 def get_all_locations():
 
