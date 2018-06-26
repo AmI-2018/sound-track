@@ -63,8 +63,6 @@ def delete_location(beacon_id):
         cursor.execute(sql, beacon_id)
         connection.commit()
 
-
-    #close connection and return True on successful delete
     finally:
         connection.close()
 

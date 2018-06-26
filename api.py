@@ -127,6 +127,23 @@ def get_user():
 
 # Update specified elements of selected user (Put Identifier)
 
+# Delete a location by beacon_id
+@api.route('/locations', methods=['DELETE'])
+def delete_location():
+    if request.headers['Content-Type'] == 'application/json':
+
+        try:
+            db.delete_location(request.json['beacon_id'])
+
+        except:
+            response = jsonify({'message': "db.delete_location() error"})
+
+        response = jsonify({'message': "DELETE Successful"})
+
+    else:
+        response = jsonify({'message': "Invalid Request"})
+
+    return response
 
 
 if __name__ == '__main__':
