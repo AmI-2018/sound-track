@@ -96,28 +96,32 @@ def get_all_users():
 # Creates new user entry (POST)
 @api.route('/users', methods = ['POST'])
 def add_user():
+    
+    #assume that it will fail, change it if it succeeds
+    response = jsonify({'message': "Invalid Request"})
+
     if request.headers['Content-Type'] == 'application/json':
 
         #only specify a string user_name and a dictionary of sleep settings (day:time), a user_id is generated in db.py
         try:
- 
+            
+            print(request.json['user_name'], request.json['sleep_settings'])
+
             db.add_user(request.json['user_name'], request.json['sleep_settings'])
+             
+            response = jsonify({'message': "POST Successful"})
 
         except:
             response = jsonify({'message': "db.add_user() error"})
 
-        response = jsonify({'message': "POST Successful"})
-
-    else:
-        response = jsonify({'message': "Invalid Request"})
 
     return response
    
 
 # Returns sleep settings and name for specified user (GET Identifier)
 @api.route('/users/<user_id>', methods = ['GET'])
-def get_user():
-    user_details = db.get_user_details()
+def get_user(user_id):
+    user_details = db.get_user_details(user_id)
 
     if not user_details:
         return jsonify({'message': "no user found"})

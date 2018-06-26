@@ -116,8 +116,8 @@ def get_beacon_details(beacon_id):
         connection.close()
         return beacon_details
 
-#add user given a string user_name and a dictionary of sleep settings (day:time)
-def add_user(user_name, **kwargs):
+#add user given a dictionary of sleep settings (day:time) and a user name
+def add_user(userdict):
 
     #a list of times in the order they are found
     ordered_sleep_settings = []
@@ -125,48 +125,48 @@ def add_user(user_name, **kwargs):
     sql = "INSERT INTO Settings (user_name, user_id"
     sql_cap = ") VALUES (%s, %s"
 
-    if "mon_start" in kwargs:
+    if "mon_start" in userdict:
 
         sql += ", mon_start, mon_end"
         sql_cap += ", %s, %s"
-        ordered_sleep_settings.extend(kwargs['mon_start'], kwargs['mon_end'])
+        ordered_sleep_settings.extend((userdict['mon_start'], userdict['mon_end']))
 
-    elif "tue_start" in kwargs:
+    if "tue_start" in userdict:
 
         sql += ", tue_start, tue_end"
         sql_cap += ", %s, %s"
-        ordered_sleep_settings.extend(kwargs['tue_start'], kwargs['tue_end'])
+        ordered_sleep_settings.extend((userdict['tue_start'], userdict['tue_end']))
 
-    elif "wed_start" in kwargs:
+    if "wed_start" in userdict:
 
         sql += ", wed_start, wed_end"
         sql_cap += ", %s, %s"
-        ordered_sleep_settings.extend(kwargs['wed_start'], kwargs['wed_end'])
+        ordered_sleep_settings.extend((userdict['wed_start'], userdict['wed_end']))
 
-    elif "thr_start" in kwargs:
+    if "thr_start" in userdict:
 
         sql += ",thr_start, thr_end"
         sql_cap += ", %s, %s"
-        ordered_sleep_settings.extend(kwargs['thr_start'], kwargs['thr_end'])
+        ordered_sleep_settings.extend((userdict['thr_start'], userdict['thr_end']))
 
-    elif "fri_start" in kwargs:
+    if "fri_start" in userdict:
 
         sql += ", fri_start, fri_end"
         sql_cap += ", %s, %s"
-        ordered_sleep_settings.extend(kwargs['fri_start'], kwargs['fri_end'])
+        ordered_sleep_settings.extend((userdict['fri_start'], userdict['fri_end']))
 
-    elif "sat_start" in kwargs:
+    if "sat_start" in userdict:
 
         sql += ", sat_start, sat_end"
         sql_cap += ", %s, %s"
-        ordered_sleep_settings.extend(kwargs['sat_start'], kwargs['sat_end'])
+        ordered_sleep_settings.extend((userdict['sat_start'], userdict['sat_end']))
 
 
-    elif "sun_start" in kwargs:
+    if "sun_start" in userdict:
 
         sql += ", sun_start, sun_end"
         sql_cap += ", %s, %s"
-        ordered_sleep_settings.extend(kwargs['sun_start'], kwargs['sun_end'])
+        ordered_sleep_settings.extend((userdict['sun_start'], userdict['sun_end']))
 
 
     sql += sql_cap    
@@ -176,7 +176,7 @@ def add_user(user_name, **kwargs):
 
     try:
         cursor = connection.cursor()
-        cursor.execute(sql, (user_name, hash(user_name), *ordered_sleep_settings))
+        cursor.execute(sql, (userdict['user_name'], hash(userdict['user_name']), *ordered_sleep_settings))
         connection.commit()
 
     finally:
