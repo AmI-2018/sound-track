@@ -1,21 +1,20 @@
 from flask import Flask, request, jsonify
-from tempfile import TemporaryFile
 import db
 import time
 
+current_location = None
+
 api = Flask(__name__)
-
-
-current_location = TemporaryFile()
-
 
 #route audio to given location, return whether the request succeeded or failed
 @api.route('/current_location', methods = ['POST'])
 def set_location():
     if request.headers['Content-Type'] == 'application/json':
+      
+        #forgive me
+        global current_location  
+        current_location= request.json['beacon_id']
         
-        current_location = request.json['beacon_id']
-
         response = jsonify({'message': "POST Successful"})
 
     else:
@@ -27,7 +26,7 @@ def set_location():
 #returns current location
 @api.route('/current_location', methods = ['GET'])
 def get_current_location():
-    
+
     try:
         return jsonify({'beacon_id': current_location})
 
