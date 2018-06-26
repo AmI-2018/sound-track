@@ -38,15 +38,15 @@ def get_ip(beacon_id):
 
     return ip_addr
 
-def add_location(beacon_id, speaker_id, ip_addr):
+def add_location(beacon_id, speaker_id, ip_addr, location_name):
     #open the connection to the database
     connection = get_connection()
 
-    sql = "INSERT INTO Beacons (beacon_id, speaker_id, ip_addr) VALUES (%s, %s, %s);"
+    sql = "INSERT INTO Beacons (beacon_id, speaker_id, ip_addr, location_name) VALUES (%s, %s, %s, %s);"
 
     try:
         cursor = connection.cursor()
-        cursor.execute(sql, (beacon_id, speaker_id, ip_addr))
+        cursor.execute(sql, (beacon_id, speaker_id, ip_addr, location_name))
         connection.commit()
 
     finally:
@@ -205,7 +205,7 @@ def get_all_users():
 
     connection = get_connection()
 
-    sql = "SELECT * FROM SETTINGS;"
+    sql = "SELECT * FROM Settings;"
 
     try:
         cursor = connection.cursor()

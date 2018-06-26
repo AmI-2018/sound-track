@@ -39,7 +39,7 @@ def add_location():
     if request.headers['Content-Type'] == 'application/json':
 
         try:
-            db.add_location(request.json['beacon_id'], request.json['speaker_id'], request.json['ip_addr'])
+            db.add_location(request.json['beacon_id'], request.json['speaker_id'], request.json['ip_addr'], request.json['location_name'])
 
         except:
 
