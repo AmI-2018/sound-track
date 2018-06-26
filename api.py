@@ -71,7 +71,7 @@ def get_beacon_details(beacon_id):
     
     details = db.get_beacon_details()
 
-    if not details
+    if not details:
         return jsonify({'message': "no information found"})
 
     return jsonify({'details': details})
@@ -97,9 +97,9 @@ def get_all_users():
 # Creates new user entry (POST)
 @api.route('/users', methods = ['POST'])
 def add_user():
- if request.headers['Content-Type'] == 'application/json':
+    if request.headers['Content-Type'] == 'application/json':
 
-     #only specify a string user_name and a dictionary of sleep settings (day:time), a user_id is generated in db.py
+        #only specify a string user_name and a dictionary of sleep settings (day:time), a user_id is generated in db.py
         try:
  
             db.add_user(request.json['user_name'], request.json['sleep_settings'])
