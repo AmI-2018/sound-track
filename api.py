@@ -107,11 +107,14 @@ def add_user():
             #i.e. "user_name":"USERNAMEHERE"
             #similarly for times:
             #i.e. "mon_start":"TIMEHERE"
-            db.add_user(request.json['userdict'])
+
+            #two python sins in one script, nice
+            db.add_user(eval(request.json['userdict']))
              
             response = jsonify({'message': "POST Successful"})
 
-        except:
+        except Exception as e:
+            print(e)
             response = jsonify({'message': "db.add_user() error"})
 
 
