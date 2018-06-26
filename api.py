@@ -102,12 +102,12 @@ def add_user():
 
     if request.headers['Content-Type'] == 'application/json':
 
-        #only specify a string user_name and a dictionary of sleep settings (day:time), a user_id is generated in db.py
         try:
-            
-            print(request.json['user_name'], request.json['sleep_settings'])
-
-            db.add_user(request.json['user_name'], request.json['sleep_settings'])
+            #the userdict should contain at least a key value pair for user_name
+            #i.e. "user_name":"USERNAMEHERE"
+            #similarly for times:
+            #i.e. "mon_start":"TIMEHERE"
+            db.add_user(request.json['userdict'])
              
             response = jsonify({'message': "POST Successful"})
 
