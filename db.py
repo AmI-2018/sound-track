@@ -1,4 +1,5 @@
 import pymysql.cursors
+import hashlib
 
 from config import USER, PASS, SOCK
 
@@ -175,8 +176,14 @@ def add_user(userdict):
     connection = get_connection()
 
     try:
+        #we are using an md5 hash of our username as our user_id
+        #a bit excessive, but the builtin hash() function
+        #returned an integer that was too large
+
+        user_name = userdict['user_name']
+
         cursor = connection.cursor()
-        cursor.execute(sql, (userdict['user_name'], hash(userdict['user_name']), *ordered_sleep_settings))
+        cursor.execute(sql, (user_name, hashlib.md5(user_name.encode('utf-8')).hexdigest(), *ordered_sleep_settings))
         connection.commit()
 
     finally:
@@ -186,7 +193,7 @@ def get_user_details(user_id):
     
     connection = get_connection()
 
-    sql = "SELECT * FROM Settings WHERE user_id = %d;"
+    sql = "SELECT * FROM Settings WHERE user_id = %s;"
 
     try:
         cursor = connection.cursor()

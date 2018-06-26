@@ -9,7 +9,7 @@ CREATE TABLE `Beacons` (
 
 DROP TABLE IF EXISTS Settings;
 CREATE TABLE Settings (
-    `user_id` BIGINT,
+    `user_id` VARCHAR(128),
     `user_name` VARCHAR(255) DEFAULT NULL,
     `mon_start` INT DEFAULT -1,
     `mon_end` INT DEFAULT -1,
