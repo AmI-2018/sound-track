@@ -16,20 +16,20 @@ namespace Sound_Track_Win
         {
             public int user_id { get; set; }
             public string user_name { get; set; }
-            public int mon_start { get; set; }
-            public int mon_end{ get; set; }
-            public int tue_start{ get; set; }
-            public int tue_end{ get; set; }
-            public int wed_start{ get; set; }
-            public int wed_end{ get; set; }
-            public int thr_start{ get; set; }
-            public int thr_end{ get; set; }
-            public int fri_start{ get; set; }
-            public int fri_end{ get; set; }
-            public int sat_start{ get; set; }
-            public int sat_end{ get; set; }
-            public int sun_start{ get; set; }
-            public int sun_end{ get; set; }
+            public string mon_start { get; set; }
+            public string mon_end{ get; set; }
+            public string tue_start{ get; set; }
+            public string tue_end{ get; set; }
+            public string wed_start{ get; set; }
+            public string wed_end{ get; set; }
+            public string thr_start{ get; set; }
+            public string thr_end{ get; set; }
+            public string fri_start{ get; set; }
+            public string fri_end{ get; set; }
+            public string sat_start{ get; set; }
+            public string sat_end{ get; set; }
+            public string sun_start{ get; set; }
+            public string sun_end{ get; set; }
         }
 
         public class BeaconResource
@@ -80,6 +80,7 @@ namespace Sound_Track_Win
                 return time.Result;
             }
 
+            //gets data on a specific user (given the user's id)
             public UserResource GetUser(string user_id)
             {
                 Task<UserResource> user = null;
@@ -91,6 +92,81 @@ namespace Sound_Track_Win
                     user.Wait();
                 }
                 return user.Result;
+            }
+
+            //gets data on all users and their quiet time settings
+            public UserResource GetAllUsers()
+            {
+                Task<UserResource> users = null;
+                Task<HttpResponseMessage> response = apiRequestClient.GetAsync("users");
+                response.Wait();
+                if (response.Result.IsSuccessStatusCode)
+                {
+                    users = response.Result.Content.ReadAsAsync<UserResource>();
+                    users.Wait();
+                }
+                return users.Result;
+            }
+
+            //gets data on a specific beacon (given the beacon's id)
+            public BeaconResource GetBeacon(string beacon_id)
+            {
+                Task<BeaconResource> beacon = null;
+                Task<HttpResponseMessage> response = apiRequestClient.GetAsync("beacons/" + beacon_id);
+                response.Wait();
+                if (response.Result.IsSuccessStatusCode)
+                {
+                    beacon = response.Result.Content.ReadAsAsync<BeaconResource>();
+                    beacon.Wait();
+                }
+                return beacon.Result;
+            }
+
+            //gets data on all beacons
+            public BeaconResource GetAllBeacons()
+            {
+                Task<BeaconResource> beacons = null;
+                Task<HttpResponseMessage> response = apiRequestClient.GetAsync("beacons");
+                response.Wait();
+                if (response.Result.IsSuccessStatusCode)
+                {
+                    beacons = response.Result.Content.ReadAsAsync<BeaconResource>();
+                    beacons.Wait();
+                }
+                return beacons.Result;
+            }
+
+            //creates a user profile
+            //sends username and quiet times to api as a dictionary
+            public void CreateUser(string user_name, Dictionary<string, string> quiet_times)
+            {
+                quiet_times.Add("user_name", user_name);         //adds username to dictionary to be posted
+                var user_data = new FormUrlEncodedContent(quiet_times);
+                Task<HttpResponseMessage> response = apiRequestClient.PostAsync("users", user_data);
+            }
+
+            //creates a beacon profile
+            //sends beacon data to api as a dictionary with key/value pairs
+            //specifying what the data is and then the data
+            //i.e., "location_name", "name of location"
+            public void CreateBeacon(Dictionary<string, string> beacon_info)
+            {
+                var new_beacon = new FormUrlEncodedContent(beacon_info);
+                Task<HttpResponseMessage> response = apiRequestClient.PostAsync("beacons", new_beacon);
+            }
+
+            //updates a specific user's quiet time settings
+            public void UpdateUser(string user_id, Dictionary<string, string> new_quiet_times)
+            {
+                var quiet_time_updates = new FormUrlEncodedContent(new_quiet_times);
+                Task<HttpResponseMessage> response = apiRequestClient.PostAsync("users/" + user_id, quiet_time_updates);
+            }
+
+            //updates beacon info
+            public void UpdateBeacon(string beacon_id, Dictionary<string, string> new_beacon_info)
+            {
+                var beacon_updates = new FormUrlEncodedContent(new_beacon_info);
+                Task<HttpResponseMessage> response = apiRequestClient.PostAsync("beacons/" + beacon_id, beacon_updates);
             }
         }
     }
