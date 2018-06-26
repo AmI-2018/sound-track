@@ -186,7 +186,7 @@ def get_user_details(user_id):
     
     connection = get_connection()
 
-    sql = "SELECT * FROM Settings WHERE user_id = %s;"
+    sql = "SELECT * FROM Settings WHERE user_id = %d;"
 
     try:
         cursor = connection.cursor()
