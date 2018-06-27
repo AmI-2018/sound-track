@@ -199,7 +199,7 @@ def get_user_details(user_id):
         cursor = connection.cursor()
         cursor.execute(sql, user_id)
         
-        user_details = cursor.fetchall()
+        user_details = cursor.fetchall()[0]
 
     finally:
         connection.close()

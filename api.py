@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 import db
 import time
+from datetime import date, datetime
 
 current_location = None
 
@@ -10,12 +11,33 @@ api = Flask(__name__)
 @api.route('/current_location', methods = ['POST'])
 def set_location():
     if request.headers['Content-Type'] == 'application/json':
-      
-        #forgive me
-        global current_location  
-        current_location= request.json['beacon_id']
+
+        user_id = request.json['user_id']
+        user_settings = db.get_user_details(user_id)
         
-        response = jsonify({'message': "POST Successful"})
+        #get the current time and put it in POSIX format
+        dt = datetime.now()
+        current_time = time.mktime(dt.timetuple())
+        
+        today = date.today.weekday()
+
+        #if today is D, check current time against settings for D_start and D_end
+        if  today == 0 and not(user_settings['mon_start'] < current_time < user_settings['mon_end']) and\
+            today == 1 and not(user_settings['tue_start'] < current_time < user_settings['tue_end']) and\
+            today == 2 and not(user_settings['wed_start'] < current_time < user_settings['wed_end']) and\ 
+            today == 3 and not(user_settings['thr_start'] < current_time < user_settings['thr_end']) and\ 
+            today == 4 and not(user_settings['fri_start'] < current_time < user_settings['fri_end']) and\
+            today == 5 and not(user_settings['sat_start'] < current_time < user_settings['sat_end']) and\
+            today == 6 and not(user_settings['sun_start'] < current_time < user_settings['sun_end']):
+            
+                #forgive me
+                global current_location  
+                current_location = request.json['beacon_id']
+        
+                response = jsonify({'message': "POST Successful"})
+
+        else:
+            response = jsonify({'message': "quiet hours in effect, current_location not changed"}) 
 
     else:
         response = jsonify({'message': "Invalid Request"})
