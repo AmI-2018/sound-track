@@ -16,7 +16,7 @@ while True:
     new_location = session.get(url)['beacon_id']
 
     if new_location == MY_ID and last_location != MY_ID:
-        command = "arecord -D hw:0,0 -f S16_LE -c2|nc {0} 3334 &;nc {0} 3333|aplay".format(SERVER)
+        command = "nc {0} 3333|aplay".format(SERVER)
         process = subprocess.Popen(command.split(), stdout=subprocess.PIPE)
         
         #this is for debugging, there shouldn't be output in normal circumstances
@@ -25,7 +25,7 @@ while True:
         last_location = MY_ID
 
     elif new_location != MY_ID:
-        command = "pkill -f 'arecord' && pkill -f 'nc' && pkill -f 'aplay'"
+        command = "sudo killall aplay && sudo killall nc"
         process = subprocess.Popen(command.split(), stdout=subprocess.PIPE)
        
          #this is for debugging, there shouldn't be output in normal circumstances
