@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Web.Script.Serialization;
 
 namespace Sound_Track_Win
+
 {
-    class SoundTrackRestAPI
+    class SoundTrackRestAP
     {
         
         public class UserResource
@@ -45,6 +47,11 @@ namespace Sound_Track_Win
             public double time { get; set; }
         }
 
+        public class LocationResource
+        {
+            public string current_location { get; set; }
+        }
+
         public class SoundTrackRestHandler
         {
 
@@ -78,6 +85,20 @@ namespace Sound_Track_Win
                     time.Wait();
                 }
                 return time.Result;
+            }
+
+            //gets current location from server
+            public LocationResource GetCurrentLocation ()
+            {
+                Task<LocationResource> location = null;
+                Task<HttpResponseMessage> response = apiRequestClient.GetAsync("current_location");
+                response.Wait();
+                if (response.Result.IsSuccessStatusCode)
+                {
+                    location = response.Result.Content.ReadAsAsync<LocationResource>();
+                    location.Wait();
+                }
+                return location.Result;
             }
 
             //gets data on a specific user (given the user's id)
@@ -167,6 +188,12 @@ namespace Sound_Track_Win
             {
                 var beacon_updates = new FormUrlEncodedContent(new_beacon_info);
                 Task<HttpResponseMessage> response = apiRequestClient.PostAsync("beacons/" + beacon_id, beacon_updates);
+            }
+
+            //updates current location
+            public void SetCurrentLocation(string new_current_location)
+            {
+                Task<HttpResponseMessage> response = apiRequestClient.PostAsJsonAsync<string>("current_location", new_current_location);
             }
         }
     }
