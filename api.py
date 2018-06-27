@@ -37,7 +37,8 @@ def set_location():
                 response = jsonify({'message': "POST Successful"})
 
         else:
-            response = jsonify({'message': "quiet hours in effect, current_location not changed"}) 
+            current_location = "quiet_hours"
+            response = jsonify({'message': "quiet hours in effect, current_location set to placeholder."}) 
 
     else:
         response = jsonify({'message': "Invalid Request"})
