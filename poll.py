@@ -7,7 +7,7 @@ session = requests.Session()
 
 session.headers.update({'Content-type': 'application/json'})
 
-url = SERVER + "/current_location"
+url = "http://" + SERVER + "/current_location"
 
 last_location = None
 
