@@ -81,6 +81,7 @@ namespace Sound_Track_Win
                 response.Wait();
                 if (response.Result.IsSuccessStatusCode)
                 {
+                    //gets data as a json string
                     time = response.Result.Content.ReadAsAsync<TimeResource>();
                     time.Wait();
                 }
@@ -95,6 +96,7 @@ namespace Sound_Track_Win
                 response.Wait();
                 if (response.Result.IsSuccessStatusCode)
                 {
+                    //gets data as a json string
                     location = response.Result.Content.ReadAsAsync<LocationResource>();
                     location.Wait();
                 }
@@ -109,6 +111,7 @@ namespace Sound_Track_Win
                 response.Wait();
                 if (response.Result.IsSuccessStatusCode)
                 {
+                    //gets data as a json string
                     user = response.Result.Content.ReadAsAsync<UserResource>();
                     user.Wait();
                 }
@@ -118,6 +121,7 @@ namespace Sound_Track_Win
             //gets data on all users and their quiet time settings
             public UserResource GetAllUsers()
             {
+                //gets data as a json string
                 Task<UserResource> users = null;
                 Task<HttpResponseMessage> response = apiRequestClient.GetAsync("users");
                 response.Wait();
@@ -137,6 +141,7 @@ namespace Sound_Track_Win
                 response.Wait();
                 if (response.Result.IsSuccessStatusCode)
                 {
+                    //gets data as a json string
                     beacon = response.Result.Content.ReadAsAsync<BeaconResource>();
                     beacon.Wait();
                 }
@@ -151,6 +156,7 @@ namespace Sound_Track_Win
                 response.Wait();
                 if (response.Result.IsSuccessStatusCode)
                 {
+                    //gets data as a json string
                     beacons = response.Result.Content.ReadAsAsync<BeaconResource>();
                     beacons.Wait();
                 }
@@ -163,7 +169,7 @@ namespace Sound_Track_Win
             {
                 quiet_times.Add("user_name", user_name);         //adds username to dictionary to be posted
                 var user_data = new FormUrlEncodedContent(quiet_times);
-                Task<HttpResponseMessage> response = apiRequestClient.PostAsync("users", user_data);
+                Task<HttpResponseMessage> response = apiRequestClient.PostAsJsonAsync("users", user_data);
             }
 
             //creates a beacon profile
@@ -173,21 +179,21 @@ namespace Sound_Track_Win
             public void CreateBeacon(Dictionary<string, string> beacon_info)
             {
                 var new_beacon = new FormUrlEncodedContent(beacon_info);
-                Task<HttpResponseMessage> response = apiRequestClient.PostAsync("beacons", new_beacon);
+                Task<HttpResponseMessage> response = apiRequestClient.PostAsJsonAsync("beacons", new_beacon);
             }
 
             //updates a specific user's quiet time settings
             public void UpdateUser(string user_id, Dictionary<string, string> new_quiet_times)
             {
                 var quiet_time_updates = new FormUrlEncodedContent(new_quiet_times);
-                Task<HttpResponseMessage> response = apiRequestClient.PostAsync("users/" + user_id, quiet_time_updates);
+                Task<HttpResponseMessage> response = apiRequestClient.PostAsJsonAsync("users/" + user_id, quiet_time_updates);
             }
 
             //updates beacon info
             public void UpdateBeacon(string beacon_id, Dictionary<string, string> new_beacon_info)
             {
                 var beacon_updates = new FormUrlEncodedContent(new_beacon_info);
-                Task<HttpResponseMessage> response = apiRequestClient.PostAsync("beacons/" + beacon_id, beacon_updates);
+                Task<HttpResponseMessage> response = apiRequestClient.PostAsJsonAsync("beacons/" + beacon_id, beacon_updates);
             }
 
             //updates current location
