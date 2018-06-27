@@ -7,14 +7,14 @@ html, body { height: 100%; }
 
 body {
   font-family: Helvetica, Arial, sans-serif;
-	font-size: 100%;
+  font-size: 100%;
 	line-height: 1.5;
 	color: #000;
 	width: 80%;
 	margin: auto;
 	background: #fff;
 	position: relative;
-	padding: 100px 30px 100px 30px;
+  padding: 0px 30px 100px 30px;
   	overflow-wrap: break-word;
 }
 
@@ -53,6 +53,7 @@ p a:hover {
   text-align: center;
   padding-bottom 30px;
   overflow-wrap: break-word;
+  clear: both;
 }
 
 #alexander-holden {
@@ -93,4 +94,37 @@ p a:hover {
   list-style-type: none;
   padding: 0;
   line-height: 0.7;
+}
+
+<!topnav styling>
+#topnav {
+  padding: 0px, 0px, 25px, 0px;
+  text-align:center;
+}
+
+#topnav ul {
+    list-style-type:none;
+    margin:0;
+    padding:0px;
+}
+
+#topnav li {
+    display:inline-block;
+    float: left;
+    min-width:33%;
+}
+
+#topnav li a {
+    display:block;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    font-family: Helvetica, Arial, sans-serif;
+    color: #fff;
+    background: #000;
+    text-decoration: none;
+}
+
+#topnav li:hover a {
+    background: #d51722;
 }

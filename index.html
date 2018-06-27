@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
   
 <head>
@@ -20,12 +20,17 @@
 <body class="stackedit">
   <div class="stackedit__html">
   
-<div id = "header">
-  <img src = "graphics/Speaker-ST_logo_full-V2.png" alt = "logo" stlye = "width:300px;height:300px;">
-  <h5>Acronym: ST</h5>
-  <p>Website: https://ami-2018.github.io/sound-track/</p>
+<div id = "topnav">
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="info.html">Project Details</a></li>
+    <li><a href="https://github.com/AmI-2018/sound-track">Github</a></li>
+  </ul>
 </div>
-
+  
+<div id = "header">
+  <img src = "graphics/Speaker-ST_logo_full-V2.png" alt = "logo" stlye = "width:100px;height:100px;">
+</div>
 
 <div id = "vision-statement">
   <hr>
@@ -63,140 +68,6 @@
   <p>Roles: Frontend Dev</p>
   </blockquote>
 </div>
-</div>
-
-<div id = "ami-main-steps"> 
-  <hr>
-  <h3 id="ami-main-steps">AmI Main Steps</h3>
-  <ul>
-  <li><strong>Sensing</strong></li>
-  </ul>
-  <p>Sound Track will have the ability to track a user’s location and movement.</p>
-  <ul>
-  <li><strong>Reasoning</strong></li>
-  </ul>
-  <p>The system will use this location data to determine the speaker system nearest to the user.</p>
-  <ul>
-  <li><strong>Acting</strong></li>
-  </ul>
-  <p>Sound Track will seamlessly shift the user’s audio (podcast, music, audiobook, etc) to the nearest available speaker system.</p>
-  <ul>
-  <li><strong>Interacting</strong></li>
-  </ul>
-  <p>The system will have an interface that provides controls for initial setup, preferences, notifications explaining why an action was automatically performed with the option to override, and active controls such as volume and possibly standard media controls (i.e. previous track, next track, pause/play, etc.).</p>
-</div>
-
-<div id = "ami-features">
-  <hr>
-  <h3 id="ami-features">AmI Features</h3>
-  <ul>
-  <li><strong>Sensitive</strong></li>
-  </ul>
-  <p>Sound Track will <em>track</em> a user’s location and movement throughout their living space.</p>
-  <ul>
-  <li><strong>Responsive</strong></li>
-  </ul>
-  <p>The system will respond in real time to changes in a user’s location.</p>
-  <ul>
-  <li><strong>Adaptive</strong></li>
-  </ul>
-  <p>Sound Track will adapt to various users’ preferences and various situations during use (for example, lowering the volume if it detects people talking).</p>
-  <ul>
-  <li><strong>Transparent</strong></li>
-  </ul>
-  <p>Sound Track will allow a user’s audio to seamlessly follow them throughout their living space with minimal effort from the user.</p>
-  <ul>
-  <li><strong>Ubiquitous</strong></li>
-  </ul>
-  <p>Sound Track will support the user’s existing speaker systems.</p>
-  <ul>
-  <li><strong>Intelligent</strong></li>
-  </ul>
-  <p>The system will be able to intelligently respond to a variety of situations, such as tracking multiple users or lowering volume for quiet areas (for example, rooms where people may be sleeping or making phone calls).</p>
-</div>
-    
-<div id = "purpose-and-scope">
-<hr>
-  <h3 id="purpose-and-scope">Purpose and Scope</h3>
-  <p> The goal of the system is to improve the user experience of listening to audio content while moving through various areas of their living space. Sound Track accomplishes this by routing the output(s) of existing audio sources to existing audio outputs such that the user is able to move freely around their living space while enjoying a seamless listening experience.</p>
-  <p> Sound Track is meant to stream existing audio output from other applications and devices and route to other existing speakers and devices. It is not the media player software nor the speaker.</p>
-</div>
-
-<div id = "project-features">
-<hr>
-  <h3 id="project-features">Project Features</h3>
-  <p><strong>Priority 1</strong></p>
-  <ol type = "1">
-  <li>Continuous tracking of user’s location</li>
-  <li>Correlating location data to appropriate playback device</li>
-  <li>Routing audio streams</li>
-  <li>Software-based audio capture and playback Windows-based systems</li>
-  <li>Software-based audio capture on Android-based mobile systems</li>
-  </ol>
-  <p><strong>Priority 2</strong></p>
-  <ol type = "1", start = "6">
-  <li>Hardware-based audio playback to standalone speaker systems</li>
-  <li>Handling for multiple users and their playback preferences</li>
-  <li>Software-based audio capture and playback on iOS</li>
-  <li>Management via webapp control panel</li>
-  </ol>
-  <p><strong>Priority 3</strong></p>
-  <ol type = "1", start = "10">
-  <li>Hardware-based audio capture from non-computer/mobile sources</li>
-  <li>Software-based audio capture and playback on Linux, macOS-based systems</li>
-  </ol>
-</div>
-
-<div id = "system-architecture">
-<hr>
-  <h3 id="system-architecture">System Architecture</h3>
-  <img src = "graphics/ST-ConnectivityDiagram.png" alt = "system architecture diagram" stlye = "width:100px;height:100px;">
-  <p><strong>Hardware</strong></p>
-  <blockquote>
-    <p>Central Server. Maintains Preference and Speaker Location databases, routes audio. Connects to audio capture and playback devices.</p>
-    <p>Location beacons/trackers. Stationary components for locating users in living space. </p>
-    <p>Supported existing audio playback devices (i.e. speakers). Receives and plays audio from Central Server.</p>
-    <p>Supported existing audio sources. Sends audio to Central Server.</p>
-    <p>On-person tracking (may be the same as audio source, also potentially optional). Mobile component for locating users in living space.</p>
-  </blockquote>
-  <p><strong>Software</strong></p>
-  <blockquote>
-    <p>WebApp control panel for playback preference management. Runs on Central Server. User interacts through mobile or computer device. Interacts with system via a preference database.</p>
-    <p>Database Management System for user(s) settings regarding music playback and initial setup, and for correlation between location information and audio playback devices. Runs on Central Server. WebApp control panel saves settings to database, while audio stream routing utilizes info in database.</p>
-    <p>Audio capture and streaming for all supported source device platforms OR utilize existing audio streaming protocols common on supported platforms. Runs on Central Server.</p>
-    <p>Audio stream routing. Utilizes location information and playback device correlation database to send user’s audio stream to appropriate playback device.</p>
-    <p>Supplementary data collection for any data potentially relevant to decision-making. Sends data to central server for eventual decision-making. Most likely would target mobile platforms.</p>
-  </blockquote>
-  <p><strong>Network</strong></p>
-  <blockquote>
-    <p>Central Server, tracking devices, audio sources and audio playback devices connect via LAN/WLAN.</p>
-  </blockquote>
-</div>
-
-<div id = "selected-components">
-<hr>
-  <h3 id = "selected-components">Selected Components</h3>
-    <p><strong>Hardware</strong></p>
-  <blockquote>
-    <p>2x min. Estimote beacons</p>
-    <p>1x min. Raspberry Pi</p>
-    <p>2x min. Speakers</p>
-    <p>1x min. Bluetooth-capable mobile device (most likely phone)</p>
-  </blockquote>
-  <p><strong>Software</strong></p>
-  <blockquote>
-    <p>MariaDB 10.2 Series</p>
-    <p>Google Cast SDK</p>
-    <p>Flask v1.0.2</p>
-  </blockquote>
-</div>
-
-<div id = "open-issues">
-  <hr>
-  <h3 id="open-issues">Open Issues</h3>
-  <p>Whichever audio streaming solution we choose to use will determine which platforms we will be able to support.</p>
-  <p>Writing standalone apps for each platform will allow us to fully use that platform’s resources (i.e. audio stream(s), native music control), but this will introduce a good deal of complexity to the system.</p>
-  <p>Writing a one-size-fits-all web app for all platforms to use will cost far less time and resources, at the expense of having less access to each platform’s resources.</p>
 </div>
   
 </body>
