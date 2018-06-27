@@ -24,8 +24,8 @@ def set_location():
         #if today is D, check current time against settings for D_start and D_end
         if  today == 0 and not(user_settings['mon_start'] < current_time < user_settings['mon_end']) and\
             today == 1 and not(user_settings['tue_start'] < current_time < user_settings['tue_end']) and\
-            today == 2 and not(user_settings['wed_start'] < current_time < user_settings['wed_end']) and\ 
-            today == 3 and not(user_settings['thr_start'] < current_time < user_settings['thr_end']) and\ 
+            today == 2 and not(user_settings['wed_start'] < current_time < user_settings['wed_end']) and\
+            today == 3 and not(user_settings['thr_start'] < current_time < user_settings['thr_end']) and\
             today == 4 and not(user_settings['fri_start'] < current_time < user_settings['fri_end']) and\
             today == 5 and not(user_settings['sat_start'] < current_time < user_settings['sat_end']) and\
             today == 6 and not(user_settings['sun_start'] < current_time < user_settings['sun_end']):
