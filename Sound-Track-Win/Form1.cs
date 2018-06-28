@@ -5,14 +5,17 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
+using Sound_Track_Win.SoundTrackRestAPI;
+using Sound_Track_Win.SoundTrackAudio;
 
 namespace Sound_Track_Win
 {
     public partial class formST : Form
     {
         userSettingsForm userSettings = new userSettingsForm();
+        SoundTrackAudioReceiver audioHandle;
         public formST()
         {
             InitializeComponent();
@@ -21,6 +24,10 @@ namespace Sound_Track_Win
             audioWorker.RunWorkerAsync();
             restBTWorker.DoWork += restBTWork;
             restBTWorker.RunWorkerAsync();
+
+            StartPosition = FormStartPosition.Manual;
+            Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - Width,
+                                   Screen.PrimaryScreen.WorkingArea.Height - Height);
 
         }
 
@@ -52,25 +59,42 @@ namespace Sound_Track_Win
             userSettings.ShowDialog();
         }
 
+        private void updateStatusText(string status)
+        {
+            statusDisplay.Text = status;
+            notifyIconST.Text = "Sound Track - Status: " + status;
+        }
+
         //Methods for background work
-        private void audioWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        private void audioWork(object sender, DoWorkEventArgs e)
         {
 
         }
 
-        private void restBTWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        private void restBTWork(object sender, DoWorkEventArgs e)
         {
-            SoundTrackRestAPI.SoundTrackRestHandler stRest = 
-                new SoundTrackRestAPI.SoundTrackRestHandler("localhost");
-            SoundTrackRestAPI.TimeResource serverTime;
-            serverTime = stRest.GetServerTime();
-            if (!serverTime.Equals(null))
+
+            statusDisplay.Invoke((MethodInvoker)delegate 
+                { updateStatusText("Connecting to server..."); } );
+
+            SoundTrackRestHandler stRest = new SoundTrackRestHandler("localhost");
+            TimeResource serverTime = null;
+
+            while (serverTime == null)
             {
-                DateTime actualTimeThing = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-                long longTime = (long)serverTime.time;
-                actualTimeThing.AddSeconds(longTime);
-                MessageBox.Show(String.Format("The server time was: {0:H:mm:ss dd/MM/yy}", actualTimeThing), "NOTE", MessageBoxButtons.OK);
+                try { serverTime = stRest.GetServerTime(); }
+                catch
+                {
+                    statusDisplay.Invoke((MethodInvoker)delegate
+                        { updateStatusText("Connection failed, retrying..."); });
+                    Thread.Sleep(5000);
+                    statusDisplay.Invoke((MethodInvoker)delegate
+                        { updateStatusText("Connecting to server..."); });
+                }
+
             }
+            statusDisplay.Invoke((MethodInvoker)delegate
+                { updateStatusText("Connected"); });
             if (rbOutput.Checked)
             {
 

@@ -114,10 +114,10 @@
             // statusDisplay
             // 
             this.statusDisplay.AutoSize = true;
-            this.statusDisplay.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.statusDisplay.Location = new System.Drawing.Point(81, 14);
+            this.statusDisplay.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statusDisplay.Location = new System.Drawing.Point(26, 42);
             this.statusDisplay.Name = "statusDisplay";
-            this.statusDisplay.Size = new System.Drawing.Size(35, 19);
+            this.statusDisplay.Size = new System.Drawing.Size(30, 17);
             this.statusDisplay.TabIndex = 1;
             this.statusDisplay.Text = "Idle";
             // 
@@ -126,7 +126,7 @@
             this.groupBox1.Controls.Add(this.rbTracker);
             this.groupBox1.Controls.Add(this.rbOutput);
             this.groupBox1.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Bold);
-            this.groupBox1.Location = new System.Drawing.Point(13, 48);
+            this.groupBox1.Location = new System.Drawing.Point(13, 71);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(231, 97);
             this.groupBox1.TabIndex = 2;
@@ -160,7 +160,7 @@
             // btnUser
             // 
             this.btnUser.Font = new System.Drawing.Font("Arial", 10.2F);
-            this.btnUser.Location = new System.Drawing.Point(12, 165);
+            this.btnUser.Location = new System.Drawing.Point(12, 188);
             this.btnUser.Name = "btnUser";
             this.btnUser.Size = new System.Drawing.Size(231, 49);
             this.btnUser.TabIndex = 3;
@@ -171,7 +171,7 @@
             // btnSystem
             // 
             this.btnSystem.Font = new System.Drawing.Font("Arial", 10.2F);
-            this.btnSystem.Location = new System.Drawing.Point(12, 232);
+            this.btnSystem.Location = new System.Drawing.Point(12, 255);
             this.btnSystem.Name = "btnSystem";
             this.btnSystem.Size = new System.Drawing.Size(231, 49);
             this.btnSystem.TabIndex = 3;
@@ -183,7 +183,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(256, 293);
+            this.ClientSize = new System.Drawing.Size(256, 313);
             this.Controls.Add(this.btnSystem);
             this.Controls.Add(this.btnUser);
             this.Controls.Add(this.groupBox1);

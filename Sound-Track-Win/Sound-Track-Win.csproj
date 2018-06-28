@@ -41,7 +41,6 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -61,6 +60,13 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="setTimeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="setTimeForm.Designer.cs">
+      <DependentUpon>setTimeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SoundTrackAudioReceiver.cs" />
     <Compile Include="soundTrackRestAPI.cs" />
     <Compile Include="userSettingsForm.cs">
       <SubType>Form</SubType>
@@ -80,6 +86,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="setTimeForm.resx">
+      <DependentUpon>setTimeForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="userSettingsForm.resx">
       <DependentUpon>userSettingsForm.cs</DependentUpon>
     </EmbeddedResource>
