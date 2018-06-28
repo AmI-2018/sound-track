@@ -28,7 +28,7 @@ h1 {
 	margin: 0 0 0.1em;
 }
 
-h2 { font-size: 22pt; }
+h2 { font-size: 36pt; }
 h3 { font-size: 20pt; }
 h4 { font-size: 18pt; }
 
@@ -50,9 +50,9 @@ p a:hover {
 }
 
 #logo {
-  width:50%;
-  height:50%;
-  padding-top:5px;
+  width:45%;
+  height:45%;
+  padding-top:20px;
 }
 
 #header {
@@ -86,6 +86,11 @@ p a:hover {
   min-width: 180px;
 }
 
+#info-header {
+  padding-top:50px;
+  text-align:center;
+}
+
 #ami-main-steps {
   clear: both;
 }
@@ -117,7 +122,7 @@ p a:hover {
 #topnav li {
     display:inline-block;
     float: left;
-    min-width:33%;
+    min-width:32%;
 }
 
 #topnav li a {
@@ -126,6 +131,7 @@ p a:hover {
     text-align: center;
     line-height: 50px;
     font-family: Helvetica, Arial, sans-serif;
+    font-weight: bold;
     color: #fff;
     background: #000;
     text-decoration: none;
