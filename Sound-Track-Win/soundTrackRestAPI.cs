@@ -1,17 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Web.Script.Serialization;
 
 namespace Sound_Track_Win
 
 {
-    class SoundTrackRestAP
+    namespace SoundTrackRestAP
     {
         
         public class UserResource
@@ -67,13 +63,7 @@ namespace Sound_Track_Win
                     new MediaTypeWithQualityHeaderValue("application/json"));
             }
 
-            /*public UserResource GetUser(string user_id)
-            {
-                Task<UserResource> taskResult = GetUserAsync(user_id);
-                taskResult.RunSynchronously();
-                return taskResult.Result;
-            }*/
-
+            //gets time from server
             public TimeResource GetServerTime()
             {
                 Task<TimeResource> time = null;
@@ -81,7 +71,7 @@ namespace Sound_Track_Win
                 response.Wait();
                 if (response.Result.IsSuccessStatusCode)
                 {
-                    //gets data as a json string
+                    //gets data as a json string and converts it to TimeResource class
                     time = response.Result.Content.ReadAsAsync<TimeResource>();
                     time.Wait();
                 }
@@ -96,7 +86,7 @@ namespace Sound_Track_Win
                 response.Wait();
                 if (response.Result.IsSuccessStatusCode)
                 {
-                    //gets data as a json string
+                    //gets data as a json string and converts it to LocationResource class
                     location = response.Result.Content.ReadAsAsync<LocationResource>();
                     location.Wait();
                 }
@@ -111,7 +101,7 @@ namespace Sound_Track_Win
                 response.Wait();
                 if (response.Result.IsSuccessStatusCode)
                 {
-                    //gets data as a json string
+                    //gets data as a json string and converts it to UserResource class
                     user = response.Result.Content.ReadAsAsync<UserResource>();
                     user.Wait();
                 }
@@ -119,15 +109,15 @@ namespace Sound_Track_Win
             }
 
             //gets data on all users and their quiet time settings
-            public UserResource GetAllUsers()
+            public List<UserResource> GetAllUsers()
             {
-                //gets data as a json string
-                Task<UserResource> users = null;
+                Task<List<UserResource>> users = null;
                 Task<HttpResponseMessage> response = apiRequestClient.GetAsync("users");
                 response.Wait();
                 if (response.Result.IsSuccessStatusCode)
                 {
-                    users = response.Result.Content.ReadAsAsync<UserResource>();
+                    //gets data as a json string and converts it to a list of UserResource class
+                    users = response.Result.Content.ReadAsAsync<List<UserResource>>();
                     users.Wait();
                 }
                 return users.Result;
@@ -141,7 +131,7 @@ namespace Sound_Track_Win
                 response.Wait();
                 if (response.Result.IsSuccessStatusCode)
                 {
-                    //gets data as a json string
+                    //gets data as a json string and converts it to BeaconResource class
                     beacon = response.Result.Content.ReadAsAsync<BeaconResource>();
                     beacon.Wait();
                 }
@@ -149,57 +139,60 @@ namespace Sound_Track_Win
             }
 
             //gets data on all beacons
-            public BeaconResource GetAllBeacons()
+            public List<BeaconResource> GetAllBeacons()
             {
-                Task<BeaconResource> beacons = null;
+                Task<List<BeaconResource>> beacons = null;
                 Task<HttpResponseMessage> response = apiRequestClient.GetAsync("beacons");
                 response.Wait();
                 if (response.Result.IsSuccessStatusCode)
                 {
-                    //gets data as a json string
-                    beacons = response.Result.Content.ReadAsAsync<BeaconResource>();
+                    //gets data as a json string and converts it to a list of BeaconResource class
+                    beacons = response.Result.Content.ReadAsAsync<List<BeaconResource>>();
                     beacons.Wait();
                 }
                 return beacons.Result;
             }
 
-            //creates a user profile
-            //sends username and quiet times to api as a dictionary
-            public void CreateUser(string user_name, Dictionary<string, string> quiet_times)
+            //creates a user profile from UserResource
+            public HttpResponseMessage CreateUser(UserResource newUser)
             {
-                quiet_times.Add("user_name", user_name);         //adds username to dictionary to be posted
-                var user_data = new FormUrlEncodedContent(quiet_times);
-                Task<HttpResponseMessage> response = apiRequestClient.PostAsJsonAsync("users", user_data);
+                Task<HttpResponseMessage> response = apiRequestClient.PostAsJsonAsync<UserResource>("users", newUser);
+                response.Wait();
+                return response.Result;
             }
 
-            //creates a beacon profile
-            //sends beacon data to api as a dictionary with key/value pairs
-            //specifying what the data is and then the data
-            //i.e., "location_name", "name of location"
-            public void CreateBeacon(Dictionary<string, string> beacon_info)
+            //creates a beacon profile from BeaconResource
+            public HttpResponseMessage CreateBeacon(BeaconResource newBeacon)
             {
-                var new_beacon = new FormUrlEncodedContent(beacon_info);
-                Task<HttpResponseMessage> response = apiRequestClient.PostAsJsonAsync("beacons", new_beacon);
+                Task<HttpResponseMessage> response = apiRequestClient.PostAsJsonAsync<BeaconResource>("beacons", newBeacon);
+                response.Wait();
+                return response.Result;
             }
 
-            //updates a specific user's quiet time settings
-            public void UpdateUser(string user_id, Dictionary<string, string> new_quiet_times)
+            //updates a specific user from UserResource, overwriting all values
+            public HttpResponseMessage UpdateUserInFull(UserResource userUpdate)
             {
-                var quiet_time_updates = new FormUrlEncodedContent(new_quiet_times);
-                Task<HttpResponseMessage> response = apiRequestClient.PostAsJsonAsync("users/" + user_id, quiet_time_updates);
+                Task<HttpResponseMessage> response = 
+                    apiRequestClient.PutAsJsonAsync<UserResource>("users/" + userUpdate.user_id, userUpdate);
+                response.Wait();
+                return response.Result;
             }
 
-            //updates beacon info
-            public void UpdateBeacon(string beacon_id, Dictionary<string, string> new_beacon_info)
+            //updates a beacon info
+            public HttpResponseMessage UpdateBeaconInFull(BeaconResource beaconUpdate)
             {
-                var beacon_updates = new FormUrlEncodedContent(new_beacon_info);
-                Task<HttpResponseMessage> response = apiRequestClient.PostAsJsonAsync("beacons/" + beacon_id, beacon_updates);
+                Task<HttpResponseMessage> response = 
+                    apiRequestClient.PutAsJsonAsync<BeaconResource>("beacons/" + beaconUpdate.beacon_id, beaconUpdate);
+                response.Wait();
+                return response.Result;
             }
 
             //updates current location
-            public void SetCurrentLocation(string new_current_location)
+            public HttpResponseMessage SetCurrentLocation(string new_current_location)
             {
                 Task<HttpResponseMessage> response = apiRequestClient.PostAsJsonAsync<string>("current_location", new_current_location);
+                response.Wait();
+                return response.Result;
             }
         }
     }
