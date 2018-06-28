@@ -84,6 +84,7 @@
             this.usernameBox.Size = new System.Drawing.Size(185, 27);
             this.usernameBox.TabIndex = 1;
             this.usernameBox.Text = "Loading...";
+            this.usernameBox.Enter += new System.EventHandler(this.usernameBox_Enter);
             // 
             // btnEditUser
             // 
@@ -93,6 +94,7 @@
             this.btnEditUser.TabIndex = 2;
             this.btnEditUser.Text = "Edit";
             this.btnEditUser.UseVisualStyleBackColor = true;
+            this.btnEditUser.Click += new System.EventHandler(this.btnEditUser_Click);
             // 
             // groupBox1
             // 
@@ -217,7 +219,7 @@
             this.monEndBox.TabIndex = 1;
             this.monEndBox.Tag = "0";
             this.monEndBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.monEndBox.Enter += new System.EventHandler(this.timeBox_Click);
+            this.monEndBox.Click += new System.EventHandler(this.timeBox_Click);
             // 
             // sunEndBox
             // 
@@ -229,7 +231,7 @@
             this.sunEndBox.TabIndex = 1;
             this.sunEndBox.Tag = "6";
             this.sunEndBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.sunEndBox.Enter += new System.EventHandler(this.timeBox_Click);
+            this.sunEndBox.Click += new System.EventHandler(this.timeBox_Click);
             // 
             // sunStartBox
             // 
@@ -241,7 +243,7 @@
             this.sunStartBox.TabIndex = 1;
             this.sunStartBox.Tag = "6";
             this.sunStartBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.sunStartBox.Enter += new System.EventHandler(this.timeBox_Click);
+            this.sunStartBox.Click += new System.EventHandler(this.timeBox_Click);
             // 
             // satEndBox
             // 
@@ -253,7 +255,7 @@
             this.satEndBox.TabIndex = 1;
             this.satEndBox.Tag = "5";
             this.satEndBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.satEndBox.Enter += new System.EventHandler(this.timeBox_Click);
+            this.satEndBox.Click += new System.EventHandler(this.timeBox_Click);
             // 
             // friEndBox
             // 
@@ -265,7 +267,7 @@
             this.friEndBox.TabIndex = 1;
             this.friEndBox.Tag = "4";
             this.friEndBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.friEndBox.Enter += new System.EventHandler(this.timeBox_Click);
+            this.friEndBox.Click += new System.EventHandler(this.timeBox_Click);
             // 
             // satStartBox
             // 
@@ -277,7 +279,7 @@
             this.satStartBox.TabIndex = 1;
             this.satStartBox.Tag = "5";
             this.satStartBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.satStartBox.Enter += new System.EventHandler(this.timeBox_Click);
+            this.satStartBox.Click += new System.EventHandler(this.timeBox_Click);
             // 
             // thrEndBox
             // 
@@ -289,7 +291,7 @@
             this.thrEndBox.TabIndex = 1;
             this.thrEndBox.Tag = "3";
             this.thrEndBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.thrEndBox.Enter += new System.EventHandler(this.timeBox_Click);
+            this.thrEndBox.Click += new System.EventHandler(this.timeBox_Click);
             // 
             // friStartBox
             // 
@@ -301,7 +303,7 @@
             this.friStartBox.TabIndex = 1;
             this.friStartBox.Tag = "4";
             this.friStartBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.friStartBox.Enter += new System.EventHandler(this.timeBox_Click);
+            this.friStartBox.Click += new System.EventHandler(this.timeBox_Click);
             // 
             // wedEndBox
             // 
@@ -313,7 +315,7 @@
             this.wedEndBox.TabIndex = 1;
             this.wedEndBox.Tag = "2";
             this.wedEndBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.wedEndBox.Enter += new System.EventHandler(this.timeBox_Click);
+            this.wedEndBox.Click += new System.EventHandler(this.timeBox_Click);
             // 
             // thrStartBox
             // 
@@ -325,7 +327,7 @@
             this.thrStartBox.TabIndex = 1;
             this.thrStartBox.Tag = "3";
             this.thrStartBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.thrStartBox.Enter += new System.EventHandler(this.timeBox_Click);
+            this.thrStartBox.Click += new System.EventHandler(this.timeBox_Click);
             // 
             // tueEndBox
             // 
@@ -337,7 +339,7 @@
             this.tueEndBox.TabIndex = 1;
             this.tueEndBox.Tag = "1";
             this.tueEndBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.tueEndBox.Enter += new System.EventHandler(this.timeBox_Click);
+            this.tueEndBox.Click += new System.EventHandler(this.timeBox_Click);
             // 
             // wedStartBox
             // 
@@ -349,7 +351,7 @@
             this.wedStartBox.TabIndex = 1;
             this.wedStartBox.Tag = "2";
             this.wedStartBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.wedStartBox.Enter += new System.EventHandler(this.timeBox_Click);
+            this.wedStartBox.Click += new System.EventHandler(this.timeBox_Click);
             // 
             // tueStartBox
             // 
@@ -361,7 +363,7 @@
             this.tueStartBox.TabIndex = 1;
             this.tueStartBox.Tag = "1";
             this.tueStartBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.tueStartBox.Enter += new System.EventHandler(this.timeBox_Click);
+            this.tueStartBox.Click += new System.EventHandler(this.timeBox_Click);
             // 
             // monStartBox
             // 
@@ -373,7 +375,7 @@
             this.monStartBox.TabIndex = 1;
             this.monStartBox.Tag = "0";
             this.monStartBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.monStartBox.Enter += new System.EventHandler(this.timeBox_Click);
+            this.monStartBox.Click += new System.EventHandler(this.timeBox_Click);
             // 
             // label5
             // 
@@ -444,6 +446,7 @@
             this.btnSave.TabIndex = 4;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnCancel
             // 
@@ -484,6 +487,7 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "User Settings";
+            this.Load += new System.EventHandler(this.userSettingsForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);

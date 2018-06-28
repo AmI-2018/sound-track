@@ -10,13 +10,15 @@ using System.Windows.Forms;
 
 namespace Sound_Track_Win
 {
-    public partial class NewUserName : Form
+    public partial class UserNameForm : Form
     {
         public string UserName { get; protected set; }
 
-        public NewUserName()
+        public UserNameForm(string descrtiption)
         {
             InitializeComponent();
+
+            descriptionLabel.Text = descrtiption;
         }
 
         private void btnOk_Click(object sender, EventArgs e)
@@ -35,6 +37,11 @@ namespace Sound_Track_Win
         {
             this.DialogResult = DialogResult.Cancel;
             Close();
+        }
+
+        private void UserNameForm_Load(object sender, EventArgs e)
+        {
+            descriptionLabel.Location = new Point((this.Width / 2) - (descriptionLabel.Width / 2) - 10, descriptionLabel.Location.Y);
         }
     }
 }

@@ -14,3 +14,5 @@ C:\Users\Zee\source\repos\Sound-Track-Win\Sound-Track-Win\obj\Debug\Sound-Track-
 C:\Users\Zee\source\repos\Sound-Track-Win\Sound-Track-Win\bin\Debug\Newtonsoft.Json.dll
 C:\Users\Zee\source\repos\Sound-Track-Win\Sound-Track-Win\bin\Debug\Newtonsoft.Json.xml
 C:\Users\Zee\source\repos\Sound-Track-Win\Sound-Track-Win\obj\Debug\Sound_Track_Win.setTimeForm.resources
+C:\Users\Zee\source\repos\Sound-Track-Win\Sound-Track-Win\obj\Debug\Sound_Track_Win.UserSelect.resources
+C:\Users\Zee\source\repos\Sound-Track-Win\Sound-Track-Win\obj\Debug\Sound_Track_Win.UserNameForm.resources

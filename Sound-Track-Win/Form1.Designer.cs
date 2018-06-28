@@ -196,6 +196,7 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Sound Track";
+            this.Load += new System.EventHandler(this.formST_Load);
             this.SizeChanged += new System.EventHandler(this.formST_SizeChanged);
             this.trayContextStrip.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);

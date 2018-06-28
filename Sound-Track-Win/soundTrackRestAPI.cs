@@ -8,32 +8,32 @@ using Newtonsoft.Json;
 namespace Sound_Track_Win
 
 {
-    namespace SoundTrackRestAPI
+    namespace RestAPI
     {
         
         public class UserResource
         {
             public string user_id { get; set; }
             public string user_name { get; set; }
-            public int mon_start { get; set; }
-            public int mon_end{ get; set; }
-            public int tue_start{ get; set; }
-            public int tue_end{ get; set; }
-            public int wed_start{ get; set; }
-            public int wed_end{ get; set; }
-            public int thr_start{ get; set; }
-            public int thr_end{ get; set; }
-            public int fri_start{ get; set; }
-            public int fri_end{ get; set; }
-            public int sat_start{ get; set; }
-            public int sat_end{ get; set; }
-            public int sun_start{ get; set; }
-            public int sun_end{ get; set; }
+            public int mon_start { get; set; } = -1;
+            public int mon_end{ get; set; } = -1;
+            public int tue_start{ get; set; } = -1;
+            public int tue_end{ get; set; } = -1;
+            public int wed_start{ get; set; } = -1;
+            public int wed_end{ get; set; } = -1;
+            public int thr_start{ get; set; } = -1;
+            public int thr_end{ get; set; } = -1;
+            public int fri_start{ get; set; } = -1;
+            public int fri_end{ get; set; } = -1;
+            public int sat_start{ get; set; } = -1;
+            public int sat_end{ get; set; } = -1;
+            public int sun_start{ get; set; } = -1;
+            public int sun_end{ get; set; } = -1;
         }
 
         public class UserListResource
         {
-            public List<UserResource> UserList { get; set; }
+            public List<UserResource> users { get; set; }
         }
 
         public class BeaconResource
@@ -138,7 +138,7 @@ namespace Sound_Track_Win
                     //result.Wait();
                     //users = JsonConvert.DeserializeObject<List<UserResource>>(result.Result);
                     users.Wait();
-                    return users.Result.UserList;
+                    return users.Result.users;
                 }
                 else { return new List<UserResource>();  }
                 

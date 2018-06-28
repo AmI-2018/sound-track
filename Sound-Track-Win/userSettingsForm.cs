@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Sound_Track_Win.SoundTrackRestAPI;
+using Sound_Track_Win.RestAPI;
 
 namespace Sound_Track_Win
 {
@@ -20,7 +20,9 @@ namespace Sound_Track_Win
         setTimeForm setTime;
 
         int index;
-        bool changesMade = false;
+        public bool changesMade { get; protected set; } = false;
+        public string UserID { get; protected set; }
+        public string UserName { get; protected set; }
 
         List<UserResource> allUsers;
         SoundTrackRestHandler stRest;
@@ -53,30 +55,24 @@ namespace Sound_Track_Win
 
             allUsers = stRest.GetAllUsers();
 
-            UserSelect selectUser = new UserSelect(stRest, allUsers);
+            UserID = userID;
 
-            if (allUsers.Count == 0)
-            {
-                index = selectUser.CreateNewUser();
-                if (index == -1) { this.Close(); }
-                usernameBox.Text = allUsers[index].user_name;
-            }
-            else if (userID == "")
-            {
-                selectUser.ShowDialog();
-                if (selectUser.DialogResult == DialogResult.OK)
-                {
-                    index = selectUser.UserListIndex;
-                    usernameBox.Text = allUsers[index].user_name;
-                }
-            }
-            else
-            {
-                for (int i = 0; i < allUsers.Count; i++)
-                {
 
-                }
-            }
+        }
+
+        void formDisposed(object sender, EventArgs e)
+        {
+            setTime = new setTimeForm(SetTimeFromForm);
+            setTime.Disposed += formDisposed;
+            btnEditTimes.Focus();
+        }
+
+        void loadUserData()
+        {
+            UserID = allUsers[index].user_id;
+
+
+            UserName = allUsers[index].user_name;
             List<int> loadedStartTimes = new List<int>() {
                         allUsers[index].mon_start, allUsers[index].tue_start, allUsers[index].wed_start,
                         allUsers[index].thr_start, allUsers[index].fri_start, allUsers[index].sat_start, allUsers[index].sun_start };
@@ -88,15 +84,11 @@ namespace Sound_Track_Win
             {
                 if (loadedStartTimes[i] > -1)
                 {
-                    startTimes[i]
+                    startTimes[i] = startTimes[i].AddMinutes(loadedStartTimes[i]);
+                    endTimes[i] = endTimes[i].AddMinutes(loadedEndTimes[i]);
                 }
             }
-        }
-
-        void formDisposed(object sender, EventArgs e)
-        {
-            setTime = new setTimeForm(SetTimeFromForm);
-            setTime.Disposed += formDisposed;
+            refreshBoxes();
         }
 
         void refreshBoxes()
@@ -105,20 +97,20 @@ namespace Sound_Track_Win
             {
                 if (startTimes[i].Equals(endTimes[i]))
                 {
-                    startBoxes[i].Text = "Not Set";
-                    endBoxes[i].Text = "Not Set";
+                    startBoxes[i].Text = "-";
+                    endBoxes[i].Text = "-";
                 }
                 else
                 {
                     if (rb24Hr.Checked)
                     {
-                        startBoxes[i].Text = string.Format("{0:HH:mm}", startTimes[i]);
-                        endBoxes[i].Text = string.Format("{0:HH:mm}", endTimes[i]);
+                        startBoxes[i].Text = string.Format("{0:H:mm}", startTimes[i]);
+                        endBoxes[i].Text = string.Format("{0:H:mm}", endTimes[i]);
                     }
                     else
                     {
-                        startBoxes[i].Text = string.Format("{0:hh:mm tt}", startTimes[i]);
-                        endBoxes[i].Text = string.Format("{0:hh:mm tt}", endTimes[i]);
+                        startBoxes[i].Text = string.Format("{0:h:mm tt}", startTimes[i]);
+                        endBoxes[i].Text = string.Format("{0:h:mm tt}", endTimes[i]);
                     }
                 }
             }
@@ -135,20 +127,20 @@ namespace Sound_Track_Win
                     endTimes[i] = obj.EndTime;
                     if (obj.StartTime.Equals(obj.EndTime))
                     {
-                        startBoxes[i].Text = "Not Set";
-                        endBoxes[i].Text = "Not Set";
+                        startBoxes[i].Text = "-";
+                        endBoxes[i].Text = "-";
                     }
                     else
                     {
                         if (rb24Hr.Checked)
                         {
-                            startBoxes[i].Text = string.Format("{0:HH:mm}", startTimes[i]);
-                            endBoxes[i].Text = string.Format("{0:HH:mm}", endTimes[i]);
+                            startBoxes[i].Text = string.Format("{0:H:mm}", startTimes[i]);
+                            endBoxes[i].Text = string.Format("{0:H:mm}", endTimes[i]);
                         }
                         else
                         {
-                            startBoxes[i].Text = string.Format("{0:hh:mm tt}", startTimes[i]);
-                            endBoxes[i].Text = string.Format("{0:hh:mm tt}", endTimes[i]);
+                            startBoxes[i].Text = string.Format("{0:h:mm tt}", startTimes[i]);
+                            endBoxes[i].Text = string.Format("{0:h:mm tt}", endTimes[i]);
                         }
                     }
                 }
@@ -186,7 +178,109 @@ namespace Sound_Track_Win
 
         private void btnChangeUser_Click(object sender, EventArgs e)
         {
+            if (changesMade)
+            {
+                if (MessageBox.Show("Changes have been made to this user.\nYou will lose changes if you continue.",
+                    "Warning", MessageBoxButtons.OKCancel) == DialogResult.Cancel) { return; }
+            }
+            UserSelect selectUser = new UserSelect(stRest, allUsers);
+            selectUser.ShowDialog();
+            index = selectUser.UserListIndex;
+            usernameBox.Text = allUsers[index].user_name;
+            loadUserData();
+            changesMade = false;
+        }
 
+        private void userSettingsForm_Load(object sender, EventArgs e)
+        {
+            UserSelect selectUser = new UserSelect(stRest, allUsers);
+
+            if (allUsers.Count > 0 && UserID != "")
+            {
+                for (int i = 0; i < allUsers.Count; i++)
+                {
+                    if (allUsers[i].user_id == UserID)
+                    {
+                        index = i;
+                        break;
+                    }
+                }
+                UserID = "";
+            }
+
+            if (allUsers.Count == 0)
+            {
+                index = selectUser.CreateNewUser();
+                if (index == -1) { this.Close(); }
+                usernameBox.Text = allUsers[index].user_name;
+            }
+            else if (UserID == "")
+            {
+                selectUser.ShowDialog();
+                if (selectUser.DialogResult == DialogResult.OK)
+                {
+                    index = selectUser.UserListIndex;
+                    usernameBox.Text = allUsers[index].user_name;
+                }
+                else { Close(); }
+            }
+
+            loadUserData();
+        }
+
+        private void usernameBox_Enter(object sender, EventArgs e)
+        {
+            btnEditUser.Focus();
+        }
+
+        private void btnEditUser_Click(object sender, EventArgs e)
+        {
+            UserNameForm renameExisting = new UserNameForm("Rename");
+            renameExisting.ShowDialog();
+            if (renameExisting.DialogResult == DialogResult.OK)
+            {
+                changesMade = true;
+                UserName = renameExisting.UserName;
+                usernameBox.Text = UserName;
+            }
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            if (changesMade)
+            {
+                UserResource updateUser = new UserResource();
+                updateUser.user_name = UserName;
+                List<int> userStartTimes = new List<int>();
+
+                List<int> userEndTimes = new List<int>();
+                for (int i = 0; i < allUsers.Count(); i++)
+                {
+                    if (startTimes[i] != endTimes[i])
+                    {
+                        TimeSpan holdStartTime = TimeSpan.FromTicks(startTimes[i].Ticks);
+                        TimeSpan holdEndTime = TimeSpan.FromTicks(endTimes[i].Ticks);
+                        userStartTimes.Add(holdStartTime.Minutes);
+                        userEndTimes.Add(holdEndTime.Minutes);
+                    }
+                    else
+                    {
+                        userStartTimes.Add(-1);
+                        userEndTimes.Add(-1);
+                    }
+                }
+
+                updateUser.mon_start = userStartTimes[0]; updateUser.mon_end = userEndTimes[0];
+                updateUser.tue_start = userStartTimes[1]; updateUser.tue_end = userEndTimes[1];
+                updateUser.wed_start = userStartTimes[2]; updateUser.wed_end = userEndTimes[2];
+                updateUser.thr_start = userStartTimes[3]; updateUser.thr_end = userEndTimes[3];
+                updateUser.fri_start = userStartTimes[4]; updateUser.fri_end = userEndTimes[4];
+                updateUser.sat_start = userStartTimes[5]; updateUser.sat_end = userEndTimes[5];
+                updateUser.sun_start = userStartTimes[6]; updateUser.sun_end = userEndTimes[6];
+
+                stRest.UpdateUserInFull(updateUser);
+            }
+            Close();
         }
     }
 }

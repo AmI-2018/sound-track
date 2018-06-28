@@ -91,14 +91,14 @@ namespace Sound_Track_Win
 
         void updateStartBox()
         {
-            if (rb24Hr.Checked) { startBox.Text = string.Format("{0:HH:mm}", StartTime); }
-            else { startBox.Text = string.Format("{0:hh:mm tt}", StartTime); }
+            if (rb24Hr.Checked) { startBox.Text = string.Format("{0:H:mm}", StartTime); }
+            else { startBox.Text = string.Format("{0:h:mm tt}", StartTime); }
         }
 
         void updateEndBox()
         {
-            if (rb24Hr.Checked) { endBox.Text = string.Format("{0:HH:mm}", EndTime); }
-            else { endBox.Text = string.Format("{0:hh:mm tt}", EndTime); }
+            if (rb24Hr.Checked) { endBox.Text = string.Format("{0:H:mm}", EndTime); }
+            else { endBox.Text = string.Format("{0:h:mm tt}", EndTime); }
         }
 
 

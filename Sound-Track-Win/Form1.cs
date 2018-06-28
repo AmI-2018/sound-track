@@ -8,15 +8,15 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using System.Net.Http;
-using Sound_Track_Win.SoundTrackRestAPI;
-using Sound_Track_Win.SoundTrackAudio;
+using Sound_Track_Win.RestAPI;
+using Sound_Track_Win.NetworkAudio;
 
 namespace Sound_Track_Win
 {
     public partial class formST : Form
     {
         userSettingsForm userSettings;
-        SoundTrackAudioReceiver audioHandle;
+        AudioReceiver audioHandle;
         SoundTrackRestHandler stRest;
 
         public formST()
@@ -28,17 +28,6 @@ namespace Sound_Track_Win
             StartPosition = FormStartPosition.Manual;
             Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - Width,
                                    Screen.PrimaryScreen.WorkingArea.Height - Height);
-
-            audioWorker.DoWork += audioWork;
-            audioWorker.RunWorkerAsync();
-            restBTWorker.DoWork += restBTWork;
-            restBTWorker.RunWorkerAsync();
-
-            /*UserResource test = new UserResource();
-            test.user_id = "a41514hj";
-            test.user_name = "Bob";
-            HttpResponseMessage result = stHandler.CreateUser(test);
-            int doNothing = 0;*/
 
         }
 
@@ -85,7 +74,18 @@ namespace Sound_Track_Win
             notifyIconST.Text = "Sound Track - Status: " + status;
         }
 
-        //Methods for background work
+        private void formST_Load(object sender, EventArgs e)
+        {
+            audioWorker.DoWork += audioWork;
+            audioWorker.RunWorkerAsync();
+            restBTWorker.DoWork += restBTWork;
+            restBTWorker.RunWorkerAsync();
+        }
+
+        //----------------------------------
+        //   Methods for background work
+        //----------------------------------
+
         private void audioWork(object sender, DoWorkEventArgs e)
         {
 

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Sound_Track_Win.SoundTrackRestAPI;
+using Sound_Track_Win.RestAPI;
 using System.Net.Http;
 
 namespace Sound_Track_Win
@@ -28,17 +28,17 @@ namespace Sound_Track_Win
 
             for (int i = 0; i < Users.Count; i++)
             {
-                listBox1.Items.Insert(i, new ListViewItem(Users[i].user_name));
+                listBox1.Items.Add(Users[i].user_name);
             }
         }
 
         public int CreateNewUser()
         {
             UserResource newUser = new UserResource();
-            NewUserName newName = new NewUserName();
+            UserNameForm newName = new UserNameForm("Create New User");
 
             newName.ShowDialog();
-            if (newName.DialogResult != DialogResult.OK) { return; }
+            if (newName.DialogResult != DialogResult.OK) { return -1; }
 
             string name = newName.UserName;
             string id;
@@ -85,7 +85,7 @@ namespace Sound_Track_Win
                     {
                         Users.Add(newUser);
                         UsersAdded = true;
-                        listBox1.Items.Insert(Users.Count - 1, new ListViewItem(name));
+                        listBox1.Items.Add(name);
                         listBox1.SelectedIndex = Users.Count - 1;
                         return Users.Count - 1;
                     }

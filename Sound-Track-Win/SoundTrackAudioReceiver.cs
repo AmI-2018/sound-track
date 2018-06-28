@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace Sound_Track_Win
 {
-    namespace SoundTrackAudio
+    namespace NetworkAudio
     {
         class ProbeData
         {
@@ -128,7 +128,7 @@ namespace Sound_Track_Win
 
         }
 
-        class SoundTrackAudioReceiver
+        class AudioReceiver
         {
             Socket streamSocket;
             Socket multicastSocket;
@@ -166,7 +166,7 @@ namespace Sound_Track_Win
 
             }
 
-            public SoundTrackAudioReceiver(string name = "")
+            public AudioReceiver(string name = "")
             {
                 deviceName = name;
 
