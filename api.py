@@ -75,6 +75,24 @@ def add_location():
 
     return response
 
+#updates location details
+@api.route('/locations', methods = ['PUT'])
+def update_location():
+    if request.headers['Content-Type'] == 'application/json':
+
+        try:
+            db.add_location(request.json['beacon_id'], request.json['speaker_id'], request.json['ip_addr'], request.json['location_name'])
+
+        except:
+
+            response = jsonify({'message': "db.add_location() error"})
+
+        response = jsonify({'message': "PUT Successful"})
+
+    else:
+        response = jsonify({'message': "Invalid Request"})
+
+    return response
 
 #returns all locations, SpeakerID, and IPAddress of client Pi
 @api.route('/locations', methods = ['GET'])
@@ -136,13 +154,37 @@ def add_user():
              
             response = jsonify({'message': "POST Successful"})
 
-        except Exception as e:
-            print(e)
+        except:
             response = jsonify({'message': "db.add_user() error"})
 
 
     return response
-   
+
+#updates user entry
+@api.route('/users', methods = ['PUT'])
+def add_user():
+    
+    #assume that it will fail, change it if it succeeds
+    response = jsonify({'message': "Invalid Request"})
+
+    if request.headers['Content-Type'] == 'application/json':
+
+        try:
+            #the userdict should contain at least a key value pair for user_name
+            #i.e. "user_name":"USERNAMEHERE"
+            #similarly for times:
+            #i.e. "mon_start":"TIMEHERE"
+
+            #two python sins in one script, nice
+            db.add_user(eval(request.json['userdict']))
+             
+            response = jsonify({'message': "PUT Successful"})
+
+        except:
+            response = jsonify({'message': "db.add_user() error"})
+
+
+    return response
 
 # Returns sleep settings and name for specified user (GET Identifier)
 @api.route('/users/<user_id>', methods = ['GET'])

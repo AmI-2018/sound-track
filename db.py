@@ -43,7 +43,7 @@ def add_location(beacon_id, speaker_id, ip_addr, location_name):
     #open the connection to the database
     connection = get_connection()
 
-    sql = "INSERT INTO Beacons (beacon_id, speaker_id, ip_addr, location_name) VALUES (%s, %s, %s, %s);"
+    sql = "REPLACE INTO Beacons (beacon_id, speaker_id, ip_addr, location_name) VALUES (%s, %s, %s, %s);"
 
     try:
         cursor = connection.cursor()
@@ -123,7 +123,7 @@ def add_user(userdict):
     #a list of times in the order they are found
     ordered_sleep_settings = []
 
-    sql = "INSERT INTO Settings (user_name, user_id"
+    sql = "REPLACE INTO Settings (user_name, user_id"
     sql_cap = ") VALUES (%s, %s"
 
     if "mon_start" in userdict:
@@ -221,3 +221,4 @@ def get_all_users():
     finally:
         connection.close()
         return users
+
