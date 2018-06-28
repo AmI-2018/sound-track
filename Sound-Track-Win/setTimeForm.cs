@@ -208,6 +208,7 @@ namespace Sound_Track_Win
                     days[i] = cbDays[i].Checked;
                 }
                 SetTimeReturnObj data = new SetTimeReturnObj(new DateTime(), new DateTime(), days);
+                onSet(data);
             }
         }
 

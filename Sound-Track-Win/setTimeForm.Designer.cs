@@ -306,7 +306,7 @@
             this.btnClear.TabIndex = 6;
             this.btnClear.Text = "Clear Days";
             this.btnClear.UseVisualStyleBackColor = true;
-            this.btnClear.Click += new System.EventHandler(this.btnSet_Click);
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // setTimeForm
             // 

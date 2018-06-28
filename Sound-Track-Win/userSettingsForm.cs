@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Sound_Track_Win.SoundTrackRestAPI;
 
 namespace Sound_Track_Win
 {
@@ -18,7 +19,14 @@ namespace Sound_Track_Win
         DateTime[] endTimes = new DateTime[7];
         setTimeForm setTime;
 
-        public userSettingsForm()
+        int index;
+        bool changesMade = false;
+
+        List<UserResource> allUsers;
+        SoundTrackRestHandler stRest;
+
+
+        public userSettingsForm(SoundTrackRestHandler stHandler, string userID = "")
         {
             InitializeComponent();
 
@@ -40,6 +48,49 @@ namespace Sound_Track_Win
 
             setTime = new setTimeForm(SetTimeFromForm);
             setTime.Disposed += formDisposed;
+
+            stRest = stHandler;
+
+            allUsers = stRest.GetAllUsers();
+
+            UserSelect selectUser = new UserSelect(stRest, allUsers);
+
+            if (allUsers.Count == 0)
+            {
+                index = selectUser.CreateNewUser();
+                if (index == -1) { this.Close(); }
+                usernameBox.Text = allUsers[index].user_name;
+            }
+            else if (userID == "")
+            {
+                selectUser.ShowDialog();
+                if (selectUser.DialogResult == DialogResult.OK)
+                {
+                    index = selectUser.UserListIndex;
+                    usernameBox.Text = allUsers[index].user_name;
+                }
+            }
+            else
+            {
+                for (int i = 0; i < allUsers.Count; i++)
+                {
+
+                }
+            }
+            List<int> loadedStartTimes = new List<int>() {
+                        allUsers[index].mon_start, allUsers[index].tue_start, allUsers[index].wed_start,
+                        allUsers[index].thr_start, allUsers[index].fri_start, allUsers[index].sat_start, allUsers[index].sun_start };
+
+            List<int> loadedEndTimes = new List<int>() {
+                        allUsers[index].mon_end, allUsers[index].tue_end, allUsers[index].wed_end,
+                        allUsers[index].thr_end, allUsers[index].fri_end, allUsers[index].sat_end, allUsers[index].sun_end };
+            for (int i = 0; i < allUsers.Count(); i++)
+            {
+                if (loadedStartTimes[i] > -1)
+                {
+                    startTimes[i]
+                }
+            }
         }
 
         void formDisposed(object sender, EventArgs e)
@@ -75,6 +126,7 @@ namespace Sound_Track_Win
 
         void SetTimeFromForm(setTimeForm.SetTimeReturnObj obj)
         {
+            changesMade = true;
             for (int i = 0; i < 7; i++)
             {
                 if (obj.SetDays[i])
@@ -115,7 +167,7 @@ namespace Sound_Track_Win
 
         void timeBox_Click(object sender, EventArgs e)
         {
-            btnEditTimes.Focus();
+            //btnEditTimes.Focus();
             TextBox senderBox = (TextBox)sender;
             int dayID = int.Parse((string)senderBox.Tag);
 
@@ -130,6 +182,11 @@ namespace Sound_Track_Win
         private void btnCancel_Click(object sender, EventArgs e)
         {
             Hide();
+        }
+
+        private void btnChangeUser_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

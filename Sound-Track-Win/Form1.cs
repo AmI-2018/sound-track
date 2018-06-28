@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
+using System.Net.Http;
 using Sound_Track_Win.SoundTrackRestAPI;
 using Sound_Track_Win.SoundTrackAudio;
 
@@ -14,20 +15,30 @@ namespace Sound_Track_Win
 {
     public partial class formST : Form
     {
-        userSettingsForm userSettings = new userSettingsForm();
+        userSettingsForm userSettings;
         SoundTrackAudioReceiver audioHandle;
+        SoundTrackRestHandler stRest;
+
         public formST()
         {
             InitializeComponent();
+
+            stRest = new SoundTrackRestHandler("localhost");
+
+            StartPosition = FormStartPosition.Manual;
+            Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - Width,
+                                   Screen.PrimaryScreen.WorkingArea.Height - Height);
 
             audioWorker.DoWork += audioWork;
             audioWorker.RunWorkerAsync();
             restBTWorker.DoWork += restBTWork;
             restBTWorker.RunWorkerAsync();
 
-            StartPosition = FormStartPosition.Manual;
-            Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - Width,
-                                   Screen.PrimaryScreen.WorkingArea.Height - Height);
+            /*UserResource test = new UserResource();
+            test.user_id = "a41514hj";
+            test.user_name = "Bob";
+            HttpResponseMessage result = stHandler.CreateUser(test);
+            int doNothing = 0;*/
 
         }
 
@@ -56,7 +67,16 @@ namespace Sound_Track_Win
 
         private void btnUser_Click(object sender, EventArgs e)
         {
-            userSettings.ShowDialog();
+            if (userSettings == null)
+            {
+                userSettings = new userSettingsForm(stRest);
+                userSettings.ShowDialog();
+            }
+            else if (!userSettings.Visible)
+            {
+                userSettings = new userSettingsForm(stRest);
+                userSettings.ShowDialog();
+            }
         }
 
         private void updateStatusText(string status)
@@ -76,8 +96,6 @@ namespace Sound_Track_Win
 
             statusDisplay.Invoke((MethodInvoker)delegate 
                 { updateStatusText("Connecting to server..."); } );
-
-            SoundTrackRestHandler stRest = new SoundTrackRestHandler("localhost");
             TimeResource serverTime = null;
 
             while (serverTime == null)

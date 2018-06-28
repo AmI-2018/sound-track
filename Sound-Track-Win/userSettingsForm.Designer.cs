@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.usernameBox = new System.Windows.Forms.ComboBox();
+            this.usernameBox = new System.Windows.Forms.TextBox();
             this.btnEditUser = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.rb12Hr = new System.Windows.Forms.RadioButton();
@@ -77,17 +77,17 @@
             // 
             // usernameBox
             // 
-            this.usernameBox.Enabled = false;
             this.usernameBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.usernameBox.Location = new System.Drawing.Point(136, 13);
             this.usernameBox.Name = "usernameBox";
-            this.usernameBox.Size = new System.Drawing.Size(185, 28);
+            this.usernameBox.ReadOnly = true;
+            this.usernameBox.Size = new System.Drawing.Size(185, 27);
             this.usernameBox.TabIndex = 1;
             this.usernameBox.Text = "Loading...";
             // 
             // btnEditUser
             // 
-            this.btnEditUser.Location = new System.Drawing.Point(327, 12);
+            this.btnEditUser.Location = new System.Drawing.Point(327, 13);
             this.btnEditUser.Name = "btnEditUser";
             this.btnEditUser.Size = new System.Drawing.Size(75, 28);
             this.btnEditUser.TabIndex = 2;
@@ -460,10 +460,11 @@
             // 
             this.btnChangeUser.Location = new System.Drawing.Point(408, 13);
             this.btnChangeUser.Name = "btnChangeUser";
-            this.btnChangeUser.Size = new System.Drawing.Size(75, 27);
+            this.btnChangeUser.Size = new System.Drawing.Size(75, 28);
             this.btnChangeUser.TabIndex = 2;
-            this.btnChangeUser.Text = "New";
+            this.btnChangeUser.Text = "Change";
             this.btnChangeUser.UseVisualStyleBackColor = true;
+            this.btnChangeUser.Click += new System.EventHandler(this.btnChangeUser_Click);
             // 
             // userSettingsForm
             // 
@@ -493,7 +494,7 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox usernameBox;
+        private System.Windows.Forms.TextBox usernameBox;
         private System.Windows.Forms.Button btnEditUser;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label8;
