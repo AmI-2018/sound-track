@@ -126,44 +126,43 @@ def add_user(userdict):
     sql = "REPLACE INTO Settings (user_name, user_id"
     sql_cap = ") VALUES (%s, %s"
 
-    if "mon_start" in userdict:
+    if userdict["mon_start"] is not None:
 
         sql += ", mon_start, mon_end"
         sql_cap += ", %s, %s"
         ordered_sleep_settings.extend((userdict['mon_start'], userdict['mon_end']))
 
-    if "tue_start" in userdict:
+    if userdict["tue_start"] is not None:
 
         sql += ", tue_start, tue_end"
         sql_cap += ", %s, %s"
         ordered_sleep_settings.extend((userdict['tue_start'], userdict['tue_end']))
 
-    if "wed_start" in userdict:
+    if userdict["wed_start"] is not None:
 
         sql += ", wed_start, wed_end"
         sql_cap += ", %s, %s"
         ordered_sleep_settings.extend((userdict['wed_start'], userdict['wed_end']))
 
-    if "thr_start" in userdict:
+    if userdict["thr_start"] is not None:
 
         sql += ",thr_start, thr_end"
         sql_cap += ", %s, %s"
         ordered_sleep_settings.extend((userdict['thr_start'], userdict['thr_end']))
 
-    if "fri_start" in userdict:
+    if userdict["fri_start"] is not None:
 
         sql += ", fri_start, fri_end"
         sql_cap += ", %s, %s"
         ordered_sleep_settings.extend((userdict['fri_start'], userdict['fri_end']))
 
-    if "sat_start" in userdict:
+    if userdict["sat_start"] is not None:
 
         sql += ", sat_start, sat_end"
         sql_cap += ", %s, %s"
         ordered_sleep_settings.extend((userdict['sat_start'], userdict['sat_end']))
 
-
-    if "sun_start" in userdict:
+    if userdict["sun_start"] is not None:
 
         sql += ", sun_start, sun_end"
         sql_cap += ", %s, %s"
@@ -176,14 +175,8 @@ def add_user(userdict):
     connection = get_connection()
 
     try:
-        #we are using an md5 hash of our username as our user_id
-        #a bit excessive, but the builtin hash() function
-        #returned an integer that was too large
-
-        user_name = userdict['user_name']
-
         cursor = connection.cursor()
-        cursor.execute(sql, (user_name, hashlib.md5(user_name.encode('utf-8')).hexdigest(), *ordered_sleep_settings))
+        cursor.execute(sql, (userdict['user_name'],userdict['user_id'], *ordered_sleep_settings))
         connection.commit()
 
     finally:

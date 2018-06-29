@@ -27,26 +27,33 @@ def set_location():
         today = date.today().weekday()
 
 	#if the current time is before noon, then bump the comparison back one day
-	if current_time < 720:
+        if current_time < 720:
             if today == 0:
                 today = 6
             else:
                 today -= 1
 
         #if today is D, check current time against settings for D_start and D_end
-        if  today == 0 and not(user_settings['mon_start'] < current_time < user_settings['mon_end']) and\
-            today == 1 and not(user_settings['tue_start'] < current_time < user_settings['tue_end']) and\
-            today == 2 and not(user_settings['wed_start'] < current_time < user_settings['wed_end']) and\
-            today == 3 and not(user_settings['thr_start'] < current_time < user_settings['thr_end']) and\
-            today == 4 and not(user_settings['fri_start'] < current_time < user_settings['fri_end']) and\
-            today == 5 and not(user_settings['sat_start'] < current_time < user_settings['sat_end']) and\
-            today == 6 and not(user_settings['sun_start'] < current_time < user_settings['sun_end']):
+        try:
+            if  today == 0 and not(user_settings['mon_start'] < current_time < user_settings['mon_end']) or\
+                today == 1 and not(user_settings['tue_start'] < current_time < user_settings['tue_end']) or\
+                today == 2 and not(user_settings['wed_start'] < current_time < user_settings['wed_end']) or\
+                today == 3 and not(user_settings['thr_start'] < current_time < user_settings['thr_end']) or\
+                today == 4 and not(user_settings['fri_start'] < current_time < user_settings['fri_end']) or\
+                today == 5 and not(user_settings['sat_start'] < current_time < user_settings['sat_end']) or\
+                today == 6 and not(user_settings['sun_start'] < current_time < user_settings['sun_end']):
             
-                #forgive me
-                global current_location  
-                current_location = request.json['beacon_id']
+                    #forgive me
+                    global current_location  
+                    current_location = request.json['beacon_id']
         
-                response = jsonify({'message': "POST Successful"})
+                    response = jsonify({'message': "POST Successful"})
+
+        except:
+            global current_location
+            current_location = request.json['beacon_id']
+
+            response = jsonify({'message': "POST Successful"})
 
         else:
             current_location = "quiet_hours"
@@ -153,7 +160,7 @@ def add_user():
     #assume that it will fail, change it if it succeeds
     response = jsonify({'message': "Invalid Request"})
 
-    if request.headers['Content-Type'] == 'application/json':
+    if request.headers['Content-Type'][:17] == 'application/json':
 
         try:
             #the userdict should contain at least a key value pair for user_name
@@ -161,8 +168,7 @@ def add_user():
             #similarly for times:
             #i.e. "mon_start":"TIMEHERE"
 
-            #two python sins in one script, nice
-            db.add_user(eval(request.json['userdict']))
+            db.add_user(request.json['userdict'])
              
             response = jsonify({'message': "POST Successful"})
 
@@ -179,7 +185,7 @@ def update_user():
     #assume that it will fail, change it if it succeeds
     response = jsonify({'message': "Invalid Request"})
 
-    if request.headers['Content-Type'] == 'application/json':
+    if request.headers['Content-Type'][:17] == 'application/json':
 
         try:
             #the userdict should contain at least a key value pair for user_name
@@ -187,8 +193,7 @@ def update_user():
             #similarly for times:
             #i.e. "mon_start":"TIMEHERE"
 
-            #two python sins in one script, nice
-            db.add_user(eval(request.json['userdict']))
+            db.add_user(request.json['userdict'])
              
             response = jsonify({'message': "PUT Successful"})
 
