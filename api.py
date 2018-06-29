@@ -159,7 +159,7 @@ def add_user():
     #assume that it will fail, change it if it succeeds
     response = jsonify({'message': "Invalid Request"})
 
-    if request.headers['Content-Type'][:17] == 'application/json':
+    if request.headers['Content-Type'][:16] == 'application/json':
 
         try:
             #the userdict should contain at least a key value pair for user_name
@@ -167,7 +167,7 @@ def add_user():
             #similarly for times:
             #i.e. "mon_start":"TIMEHERE"
 
-            db.add_user(request.json['userdict'])
+            db.add_user(request.json)
              
             response = jsonify({'message': "POST Successful"})
 
@@ -184,7 +184,7 @@ def update_user():
     #assume that it will fail, change it if it succeeds
     response = jsonify({'message': "Invalid Request"})
 
-    if request.headers['Content-Type'][:17] == 'application/json':
+    if request.headers['Content-Type'][:16] == 'application/json':
 
         try:
             #the userdict should contain at least a key value pair for user_name
@@ -192,7 +192,7 @@ def update_user():
             #similarly for times:
             #i.e. "mon_start":"TIMEHERE"
 
-            db.add_user(request.json['userdict'])
+            db.add_user(request.json)
              
             response = jsonify({'message': "PUT Successful"})
 
