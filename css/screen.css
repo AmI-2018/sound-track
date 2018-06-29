@@ -57,6 +57,7 @@ p a:hover {
 
 #header {
   text-align: center;
+  padding-top:10px;
   padding-bottom: 30px;
   overflow-wrap: break-word;
   clear: both;
