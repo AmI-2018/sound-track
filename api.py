@@ -10,19 +10,20 @@ api = Flask(__name__)
 #route audio to given location, return whether the request succeeded or failed
 @api.route('/current_location', methods = ['POST'])
 def set_location():
+    global current_location
     if request.headers['Content-Type'] == 'application/json':
 
         user_id = request.json['user_id']
 
     try:
         user_settings = db.get_user_details(user_id)[0]
+
     except:
         user_settings = {}
         
         #get the number of minutes from midnight
         now = datetime.now()
         current_time = ((now - now.replace(hour=0, minute=0, second=0, microsecond=0)).total_seconds()) / 60
-
 
         today = date.today().weekday()
 
@@ -44,13 +45,11 @@ def set_location():
                 today == 6 and not(user_settings['sun_start'] < current_time < user_settings['sun_end']):
             
                     #forgive me
-                    global current_location  
                     current_location = request.json['beacon_id']
         
                     response = jsonify({'message': "POST Successful"})
 
         except:
-            global current_location
             current_location = request.json['beacon_id']
 
             response = jsonify({'message': "POST Successful"})
