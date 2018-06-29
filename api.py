@@ -178,8 +178,8 @@ def add_user():
     return response
 
 #updates user entry
-@api.route('/users', methods = ['PUT'])
-def update_user():
+@api.route('/users/<user_id>', methods = ['PUT'])
+def update_user(user_id):
     
     #assume that it will fail, change it if it succeeds
     response = jsonify({'message': "Invalid Request"})
@@ -192,6 +192,8 @@ def update_user():
             #similarly for times:
             #i.e. "mon_start":"TIMEHERE"
 
+            request.json['user_id'] = user_id
+        
             db.add_user(request.json)
              
             response = jsonify({'message': "PUT Successful"})
