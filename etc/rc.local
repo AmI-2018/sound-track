@@ -20,7 +20,7 @@ fi
 su pi -c 'python3 /home/pi/sound-track/api.py >> /tmp/sound-track-api.log 2>&1 &'
 printf "api.py running, logfile at /tmp/sound-track-api.log!"
 
-sudo pi -c 'bash /home/pi/sound-track/api.py >> /tmp/arecord.log 2>&1 &'
+sudo pi -c 'bash /home/pi/sound-track/stream.sh >> /tmp/arecord.log 2>&1 &'
 printf "arecord running, logfile at /tmp/arecord.log!"
 
 exit 0
