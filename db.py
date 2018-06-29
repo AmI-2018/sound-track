@@ -26,7 +26,7 @@ def get_ip(beacon_id):
 
         output = cursor.fetchall()
 
-        speaker__id = ''
+        speaker_id = ''
 
         if not output:
             ip_addr = 'NoIPFound'
@@ -198,8 +198,7 @@ def get_user_details(user_id):
     try:
         cursor = connection.cursor()
         cursor.execute(sql, user_id)
-        
-        user_details = cursor.fetchall()[0]
+        user_details = cursor.fetchall()
 
     finally:
         connection.close()

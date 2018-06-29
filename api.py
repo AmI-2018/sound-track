@@ -13,13 +13,25 @@ def set_location():
     if request.headers['Content-Type'] == 'application/json':
 
         user_id = request.json['user_id']
-        user_settings = db.get_user_details(user_id)
+
+    try:
+        user_settings = db.get_user_details(user_id)[0]
+    except:
+        user_settings = {}
         
-        #get the current time and put it in POSIX format
-        dt = datetime.now()
-        current_time = time.mktime(dt.timetuple())
-        
-        today = date.today.weekday()
+        #get the number of minutes from midnight
+        now = datetime.now()
+        current_time = ((now - now.replace(hour=0, minute=0, second=0, microsecond=0)).total_seconds()) / 60
+
+
+        today = date.today().weekday()
+
+	#if the current time is before noon, then bump the comparison back one day
+	if current_time < 720:
+            if today == 0:
+                today = 6
+            else:
+                today -= 1
 
         #if today is D, check current time against settings for D_start and D_end
         if  today == 0 and not(user_settings['mon_start'] < current_time < user_settings['mon_end']) and\
@@ -162,7 +174,7 @@ def add_user():
 
 #updates user entry
 @api.route('/users', methods = ['PUT'])
-def add_user():
+def update_user():
     
     #assume that it will fail, change it if it succeeds
     response = jsonify({'message': "Invalid Request"})
@@ -219,5 +231,5 @@ def delete_location():
 
 
 if __name__ == '__main__':
-    api.run()
+    api.run(host='0.0.0.0')
 
