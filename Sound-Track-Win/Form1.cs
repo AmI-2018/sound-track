@@ -19,11 +19,23 @@ namespace Sound_Track_Win
         AudioReceiver audioHandle;
         SoundTrackRestHandler stRest;
 
+        //Save-related values
+        string settingsFile = "settings.csv";
+        string UserID;
+        string serverIP;
+
+        //Status values
+        bool connectedToServer;
+        bool receivingAudio;
+        
+
         public formST()
         {
             InitializeComponent();
 
-            stRest = new SoundTrackRestHandler("localhost");
+            audioHandle = new AudioReceiver("Blitz");
+
+            //stRest = new SoundTrackRestHandler("192.168.0.107");
 
             StartPosition = FormStartPosition.Manual;
             Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - Width,
@@ -70,8 +82,11 @@ namespace Sound_Track_Win
 
         private void updateStatusText(string status)
         {
-            statusDisplay.Text = status;
-            notifyIconST.Text = "Sound Track - Status: " + status;
+            statusDisplay.Invoke((MethodInvoker)delegate
+            {
+                statusDisplay.Text = status;
+                notifyIconST.Text = "Sound Track - Status: " + status;
+            });
         }
 
         private void formST_Load(object sender, EventArgs e)
@@ -94,8 +109,7 @@ namespace Sound_Track_Win
         private void restBTWork(object sender, DoWorkEventArgs e)
         {
 
-            statusDisplay.Invoke((MethodInvoker)delegate 
-                { updateStatusText("Connecting to server..."); } );
+            updateStatusText("Connecting to server...");
             TimeResource serverTime = null;
 
             while (serverTime == null)
@@ -103,16 +117,13 @@ namespace Sound_Track_Win
                 try { serverTime = stRest.GetServerTime(); }
                 catch
                 {
-                    statusDisplay.Invoke((MethodInvoker)delegate
-                        { updateStatusText("Connection failed, retrying..."); });
+                    updateStatusText("Connection failed, retrying...");
                     Thread.Sleep(5000);
-                    statusDisplay.Invoke((MethodInvoker)delegate
-                        { updateStatusText("Connecting to server..."); });
+                    updateStatusText("Connecting to server...");
                 }
 
             }
-            statusDisplay.Invoke((MethodInvoker)delegate
-                { updateStatusText("Connected"); });
+            updateStatusText("Connected");
             if (rbOutput.Checked)
             {
 

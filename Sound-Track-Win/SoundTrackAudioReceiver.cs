@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 using System.ComponentModel;
 using System.Net;
 using System.Net.Sockets;
@@ -16,6 +17,16 @@ namespace Sound_Track_Win
         {
             public string Key { get; set; }
             public int StreamPort { get; set; }
+            public int ByteLength
+            {
+                get
+                {
+                    List<byte> data = new List<byte>();
+                    data.AddRange(Encoding.UTF8.GetBytes(Key));
+                    data.AddRange(BitConverter.GetBytes(StreamPort));
+                    return data.Count;
+                }
+            }
 
             public ProbeData()
             {
@@ -23,27 +34,41 @@ namespace Sound_Track_Win
                 StreamPort = 0;
             }
 
-            public ProbeData(byte[] data)
+            public ProbeData(byte[] data) { fromBytes(data); }
+
+            public ProbeData(int port)
+            {
+                Key = "soundtrack";
+                StreamPort = port;
+            }
+
+            public bool IsGoodData { get { return Key == "soundtrack"; } }
+
+            public byte[] toBytes()
+            {
+                List<byte> data = new List<byte>();
+                data.AddRange(Encoding.UTF8.GetBytes(Key));
+                data.AddRange(BitConverter.GetBytes(StreamPort));
+                return data.ToArray();
+            }
+
+            public void fromBytes(byte[] data)
             {
                 try
                 {
                     Key = Encoding.UTF8.GetString(data, 0, 10);
-                    StreamPort = BitConverter.ToInt32(data, 11);
+                    StreamPort = BitConverter.ToInt32(data, 10);
                 }
-                catch
+                catch (Exception e)
                 {
+                    MessageBox.Show(e.ToString());
                     Key = "";
                     StreamPort = 0;
                 }
             }
-
-            public bool IsGoodData()
-            {
-                return Key == "soundtrack";
-            }
         }
 
-        class OutputResponseData
+        class DeviceData
         {
             public string Key { get; set; }
             public deviceType ThisDevice { get; set; }
@@ -60,8 +85,7 @@ namespace Sound_Track_Win
                     data.AddRange(BitConverter.GetBytes(StreamPort));
                     data.AddRange(BitConverter.GetBytes(UpdatePort));
                     data.AddRange(BitConverter.GetBytes(DeviceName.Length));
-                    data.AddRange(Encoding.UTF8.GetBytes(DeviceName));
-                    return data.Count;
+                    return data.Count + 255;
                 }
             }
             
@@ -69,10 +93,11 @@ namespace Sound_Track_Win
             {
                 unknown,
                 dedicatedOutput,
-                smartOutput
+                smartOutput,
+                server
             }
 
-            public OutputResponseData()
+            public DeviceData()
             {
                 Key = "";
                 ThisDevice = deviceType.unknown;
@@ -80,7 +105,7 @@ namespace Sound_Track_Win
                 UpdatePort = 0;
                 DeviceName = "";
             }
-            public OutputResponseData(deviceType device, int streamPort, int updatePort, string deviceName)
+            public DeviceData(deviceType device, int streamPort, int updatePort, string deviceName)
             {
                 Key = "soundtrack";
                 ThisDevice = device;
@@ -88,16 +113,31 @@ namespace Sound_Track_Win
                 UpdatePort = updatePort;
                 DeviceName = deviceName;
             }
-            public OutputResponseData(byte[] data)
+            public DeviceData(byte[] data) { fromBytes(data); }
+
+            public byte[] toBytes()
+            {
+                if (DeviceName.Length < 255) { DeviceName = DeviceName.PadRight(255); }
+                else { DeviceName = DeviceName.Substring(0, 255); }
+
+                List<byte> data = new List<byte>();
+                data.AddRange(Encoding.UTF8.GetBytes(Key));
+                data.Add((byte)ThisDevice);
+                data.AddRange(BitConverter.GetBytes(StreamPort));
+                data.AddRange(BitConverter.GetBytes(UpdatePort));
+                data.AddRange(Encoding.UTF8.GetBytes(DeviceName));
+                return data.ToArray();
+            }
+
+            public void fromBytes(byte[] data)
             {
                 try
                 {
                     Key = Encoding.UTF8.GetString(data, 0, 10);
-                    ThisDevice = (deviceType)data[11];
-                    StreamPort = BitConverter.ToInt32(data, 12);
-                    UpdatePort = BitConverter.ToInt32(data, 16);
-                    int length = BitConverter.ToInt32(data, 20);
-                    DeviceName = Encoding.UTF8.GetString(data, 24, length);
+                    ThisDevice = (deviceType)data[10];
+                    StreamPort = BitConverter.ToInt32(data, 11);
+                    UpdatePort = BitConverter.ToInt32(data, 15);
+                    DeviceName = Encoding.UTF8.GetString(data, 24, 255);
                 }
                 catch
                 {
@@ -109,46 +149,40 @@ namespace Sound_Track_Win
                 }
             }
 
-            public byte[] toBytes()
+            public void setValues(deviceType device, int streamPort, int updatePort, string deviceName)
             {
-                List<byte> data = new List<byte>();
-                data.AddRange(Encoding.UTF8.GetBytes(Key));
-                data.Add((byte)ThisDevice);
-                data.AddRange(BitConverter.GetBytes(StreamPort));
-                data.AddRange(BitConverter.GetBytes(UpdatePort));
-                data.AddRange(BitConverter.GetBytes(DeviceName.Length));
-                data.AddRange(Encoding.UTF8.GetBytes(DeviceName));
-                return data.ToArray();
+                Key = "soundtrack";
+                ThisDevice = device;
+                StreamPort = streamPort;
+                UpdatePort = updatePort;
+                DeviceName = deviceName;
             }
 
-            public bool IsGoodData()
-            {
-                return Key == "soundtrack";
-            }
+            public bool IsGoodData { get { return Key == "soundtrack"; } }
 
         }
 
         class AudioReceiver
         {
             Socket streamSocket;
-            Socket multicastSocket;
+            Socket multicastSocketR;
             Socket messageSocket;
             MulticastOption multicast;
             IPAddress multicastIP = IPAddress.Parse("239.205.205.205");
             IPAddress serverIPAd;
 
-            Task serverWaitTask;
-            Task respondTask;
-
             int serverComPort;
             int serverStreamPort;
-            int multicastPort = 2250;
+            int multicastPortT = 2249;
+            int multicastPortR = 2250;
             int streamPort = 2251;
-            int updatePort = 2252;
+            //int updatePort = 2252;
 
             string deviceName { get; set; }
             public bool connectedToServer { get; } = false;
             public bool receivingStream { get; } = false;
+
+            byte[] multicastDataR = new byte[14];
 
             public String serverIP
             {
@@ -170,21 +204,110 @@ namespace Sound_Track_Win
             {
                 deviceName = name;
 
-                UdpClient test = new UdpClient();
-
                 streamSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
-                multicastSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+                multicastSocketR = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
                 messageSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
                 multicast = new MulticastOption(multicastIP);
 
-                serverWaitTask = new Task(WaitForMulticastMessage);
 
                 try
                 {
-                    EndPoint multicastEP = (EndPoint)new IPEndPoint(IPAddress.Any, multicastPort);
-                    multicastSocket.Bind(multicastEP);
-                    multicastSocket.SetSocketOption(SocketOptionLevel.IP, SocketOptionName.AddMembership, multicast);
-                    serverWaitTask.Start();
+                    EndPoint localEP = (EndPoint)new IPEndPoint(IPAddress.Any, multicastPortR);
+                    multicastSocketR.Bind(localEP);
+                    multicastSocketR.SetSocketOption(SocketOptionLevel.IP, SocketOptionName.AddMembership, multicast);
+                    EndPoint multicastEP = (EndPoint)new IPEndPoint(multicastIP, multicastPortR);
+                    multicastSocketR.BeginReceiveFrom(multicastDataR, 0, multicastDataR.Length, SocketFlags.None, ref multicastEP, new AsyncCallback(ReceivedMulticastMessage), null);
+                }
+                catch(Exception e)
+                {
+                    MessageBox.Show(e.ToString());
+                }
+
+            }
+
+            int PollServer()
+            {
+                return 0;
+            }
+
+            void ReceivedMulticastMessage(IAsyncResult result)
+            {
+                EndPoint serverEP = new IPEndPoint(IPAddress.Any, 0);
+
+                multicastSocketR.EndReceiveFrom(result, ref serverEP);
+
+                IPEndPoint serverIPEP = (IPEndPoint)serverEP;
+
+                ProbeData data = new ProbeData(multicastDataR);
+
+                if (data.IsGoodData)
+                {
+                    MessageBox.Show("Received good data!");
+                    serverIPAd = serverIPEP.Address;
+                    serverStreamPort = data.StreamPort;
+                }
+                else
+                {
+                    MessageBox.Show("Received bad data");
+                }
+            }
+        }
+
+        class AudioServer
+        {
+            Socket streamSocket;
+            Socket multicastSocketT;
+            Socket messageSocket;
+            MulticastOption multicast;
+            IPAddress multicastIP = IPAddress.Parse("239.205.205.205");
+            IPAddress serverIPAd;
+
+            Thread serverWaitTask;
+            Thread respondTask;
+
+            int serverComPort;
+            int serverStreamPort;
+            int multicastPortT = 2249;
+            int multicastPortR = 2250;
+            int streamPort = 2251;
+            //int updatePort = 2252;
+
+            string deviceName { get; set; }
+            public bool connectedToServer { get; } = false;
+            public bool receivingStream { get; } = false;
+
+            public String serverIP
+            {
+                get
+                {
+                    if (connectedToServer)
+                    {
+                        return serverIP.ToString();
+                    }
+                    else
+                    {
+                        return "";
+                    }
+                }
+
+            }
+
+            public AudioServer(string name = "")
+            {
+                deviceName = name;
+
+                UdpClient test = new UdpClient();
+
+                streamSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+                multicastSocketT = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+                messageSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                multicast = new MulticastOption(multicastIP);
+
+                try
+                {
+                    EndPoint localEP = (EndPoint)new IPEndPoint(IPAddress.Any, multicastPortT);
+                    multicastSocketT.Bind(localEP);
+                    multicastSocketT.SetSocketOption(SocketOptionLevel.IP, SocketOptionName.AddMembership, multicast);
                 }
                 catch
                 {
@@ -193,32 +316,14 @@ namespace Sound_Track_Win
 
             }
 
-            void WaitForMulticastMessage()
+            public void Send()
             {
-                byte[] dataReceive = new byte[14];
-                EndPoint remoteEP = new IPEndPoint(IPAddress.Any, 0);
+                EndPoint multicastEP = (EndPoint)new IPEndPoint(multicastIP, multicastPortR);
 
-                while (!connectedToServer)
-                {
-                    try
-                    {
-                        IAsyncResult receive = multicastSocket.BeginReceiveFrom(dataReceive, 0, dataReceive.Length,
-                            SocketFlags.None, ref remoteEP, null, null);
-                        receive.AsyncWaitHandle.WaitOne();
-
-                        ProbeData receivedProbe = new ProbeData(dataReceive);
-                        if (receivedProbe.IsGoodData())
-                        {
-                            serverComPort = BitConverter.ToInt32(dataReceive, 11);
-                            IPEndPoint ipEP = (IPEndPoint)remoteEP;
-                            serverIPAd = ipEP.Address;
-                        }
-                    }
-                    catch (Exception e)
-                    {
-                        MessageBox.Show(e.ToString());
-                    }
-                }
+                ProbeData testData = new ProbeData(streamPort);
+                byte[] message = testData.toBytes();
+                multicastSocketT.Connect(multicastEP);
+                multicastSocketT.Send(message, message.Length, SocketFlags.None);
             }
 
         }

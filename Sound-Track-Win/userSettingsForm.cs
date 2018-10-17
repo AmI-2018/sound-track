@@ -211,7 +211,7 @@ namespace Sound_Track_Win
             if (allUsers.Count == 0)
             {
                 index = selectUser.CreateNewUser();
-                if (index == -1) { this.Close(); }
+                if (index == -1) { this.Close(); return; }
                 usernameBox.Text = allUsers[index].user_name;
             }
             else if (UserID == "")
@@ -250,18 +250,19 @@ namespace Sound_Track_Win
             if (changesMade)
             {
                 UserResource updateUser = new UserResource();
+                updateUser.user_id = UserID;
                 updateUser.user_name = UserName;
                 List<int> userStartTimes = new List<int>();
 
                 List<int> userEndTimes = new List<int>();
-                for (int i = 0; i < allUsers.Count(); i++)
+                for (int i = 0; i < 7; i++)
                 {
                     if (startTimes[i] != endTimes[i])
                     {
                         TimeSpan holdStartTime = TimeSpan.FromTicks(startTimes[i].Ticks);
                         TimeSpan holdEndTime = TimeSpan.FromTicks(endTimes[i].Ticks);
-                        userStartTimes.Add(holdStartTime.Minutes);
-                        userEndTimes.Add(holdEndTime.Minutes);
+                        userStartTimes.Add((int)holdStartTime.TotalMinutes);
+                        userEndTimes.Add((int)holdEndTime.TotalMinutes);
                     }
                     else
                     {
